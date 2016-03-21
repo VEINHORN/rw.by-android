@@ -34,7 +34,9 @@ import okhttp3.internal.framed.Header;
 public class MainActivity extends AppCompatActivity {
 
     private OkHttpClient httpClient;
+
     private static final String BASE_URL = "https://poezd.rw.by";
+    private static final String SIGN_IN_PAGE_URL = "https://poezd.rw.by/wps/portal/home/login_main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Get proper sign in form url
                     Request request = new Request.Builder()
-                            .url("https://poezd.rw.by/wps/portal/home/login_main")
+                            .url(SIGN_IN_PAGE_URL)
                             .build();
                     Response response = httpClient.newCall(request).execute();
 
@@ -90,13 +92,13 @@ public class MainActivity extends AppCompatActivity {
 
                     Request signInRequest = new Request.Builder()
                             .url(signInUrl)
-                            .header("Content-Type", "application/x-www-form-urlencoded")
+                            .header("Content-Type", "application/x-www-form-urlencoded") // be on the safe side
                             .post(formBody)
                             .build();
 
                     //Response signInResponse = httpClient.newCall(signInRequest).execute(); // don't work
                     Response signInResponse = httpClient.newCall(signInRequest).execute().priorResponse(); // get prior because server redirect
-                    
+
                     Integer test = 3450345;
                     /////
                 } catch (IOException e) {
