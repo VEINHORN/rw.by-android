@@ -90,12 +90,13 @@ public class MainActivity extends AppCompatActivity {
 
                     Request signInRequest = new Request.Builder()
                             .url(signInUrl)
-                            .header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36")
+                            .header("Content-Type", "application/x-www-form-urlencoded")
                             .post(formBody)
                             .build();
 
-                    Response signInResponse = httpClient.newCall(signInRequest).execute();
-
+                    //Response signInResponse = httpClient.newCall(signInRequest).execute(); // don't work
+                    Response signInResponse = httpClient.newCall(signInRequest).execute().priorResponse(); // get prior because server redirect
+                    
                     Integer test = 3450345;
                     /////
                 } catch (IOException e) {
