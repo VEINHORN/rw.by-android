@@ -37,7 +37,7 @@ public class TicketsLoader extends AsyncTask<String, Void, String> {
 
     public TicketsLoader(Context context) {
         this.context = context;
-        httpClient = new OkHttpClient();
+        httpClient = TicketsApp.httpClient;
     }
 
     @Override
