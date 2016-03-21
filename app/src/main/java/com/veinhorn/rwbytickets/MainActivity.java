@@ -1,5 +1,6 @@
 package com.veinhorn.rwbytickets;
 
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,7 +17,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
@@ -54,8 +57,17 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
-                //Response response = null;
                 try {
+                    // Read creds from propertie file
+                    Resources resources = getResources();
+                    InputStream rawResource = resources.openRawResource(R.raw.creds);
+                    Properties properties = new Properties();
+                    properties.load(rawResource);
+
+                    String login = properties.getProperty("login");
+                    String password = properties.getProperty("password");
+                    //
+
                     // Get proper sign in form url
                     Request request = new Request.Builder()
                             .url("https://poezd.rw.by/wps/portal/home/login_main")
@@ -72,12 +84,13 @@ public class MainActivity extends AppCompatActivity {
 
                     // Create body with POST parameters
                     RequestBody formBody = new FormBody.Builder()
-                            .add("login", "")
-                            .add("password", "")
+                            .add("login", login)
+                            .add("password", password)
                             .build();
 
                     Request signInRequest = new Request.Builder()
                             .url(signInUrl)
+                            .header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36")
                             .post(formBody)
                             .build();
 
