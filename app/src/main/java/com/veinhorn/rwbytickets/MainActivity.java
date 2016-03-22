@@ -7,20 +7,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import butterknife.Bind;
+
 public class MainActivity extends AppCompatActivity {
-    private EditText fromStationEditText;
-    private EditText toStationEditText;
+    @Bind(R.id.toolbar) protected Toolbar toolbar;
+    @Bind(R.id.fromStationEditText) protected EditText fromStationEditText;
+    @Bind(R.id.toStationEditText) protected EditText toStationEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        fromStationEditText = (EditText) findViewById(R.id.fromStationEditText);
-        toStationEditText = (EditText) findViewById(R.id.toStationEditText);
 
         new TicketsLoader(this).execute();
     }
