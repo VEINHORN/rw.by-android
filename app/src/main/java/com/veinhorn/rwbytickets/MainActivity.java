@@ -3,8 +3,12 @@ package com.veinhorn.rwbytickets;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 import butterknife.Bind;
@@ -12,7 +16,7 @@ import butterknife.Bind;
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.toolbar) protected Toolbar toolbar;
     @Bind(R.id.fromStationEditText) protected EditText fromStationEditText;
-    @Bind(R.id.toStationEditText) protected EditText toStationEditText;
+    private AutoCompleteTextView toStationAutoCompleteTextView; // butterknife cannot bind this ??
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +25,15 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        new TicketsLoader(this).execute();
+        toStationAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.toStationAutoCompleteTextView);
+        toStationAutoCompleteTextView.addTextChangedListener();
+
+        String[] languages = {"Java", "Java 1", "Java 2", "Java 3", "Java 4", "Java 5", "Scala", "Erlang", "lol", "ale", "nigger"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.select_dialog_item, languages);
+        // autoCompleteTextView.setThreshold(1);
+        toStationAutoCompleteTextView.setAdapter(adapter);
+        // new TicketsLoader(this).execute();
     }
 
     @Override
