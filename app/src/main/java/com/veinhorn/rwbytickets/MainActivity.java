@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         toStationAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.toStationAutoCompleteTextView);
-        toStationAutoCompleteTextView.addTextChangedListener();
+        //toStationAutoCompleteTextView.addTextChangedListener();
 
         String[] languages = {"Java", "Java 1", "Java 2", "Java 3", "Java 4", "Java 5", "Scala", "Erlang", "lol", "ale", "nigger"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
