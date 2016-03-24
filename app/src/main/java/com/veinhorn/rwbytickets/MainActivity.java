@@ -3,17 +3,21 @@ package com.veinhorn.rwbytickets;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
-import butterknife.Bind;
+import com.veinhorn.rwbytickets.rest.RwService;
+import com.veinhorn.rwbytickets.rest.Stations;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.Bind;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class MainActivity extends AppCompatActivity implements Callback<Stations> {
     @Bind(R.id.toolbar) protected Toolbar toolbar;
     @Bind(R.id.fromStationEditText) protected EditText fromStationEditText;
     private AutoCompleteTextView toStationAutoCompleteTextView; // butterknife cannot bind this ??
@@ -28,12 +32,24 @@ public class MainActivity extends AppCompatActivity {
         toStationAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.toStationAutoCompleteTextView);
         //toStationAutoCompleteTextView.addTextChangedListener();
 
-        String[] languages = {"Java", "Java 1", "Java 2", "Java 3", "Java 4", "Java 5", "Scala", "Erlang", "lol", "ale", "nigger"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.select_dialog_item, languages);
+        // String[] languages = {"Java", "Java 1", "Java 2", "Java 3", "Java 4", "Java 5", "Scala", "Erlang", "lol", "ale", "nigger"};
+        // ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+        //        android.R.layout.select_dialog_item, languages);
         // autoCompleteTextView.setThreshold(1);
-        toStationAutoCompleteTextView.setAdapter(adapter);
+        // toStationAutoCompleteTextView.setAdapter(adapter);
         // new TicketsLoader(this).execute();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://poezd.rw.by/wps/PA_eTicketInquire/AutoComplete?type=STATION")
+                .client(TicketsApp.httpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RwService service = retrofit.create(RwService.class);
+    }
+
+    @Override
+    public void onResponse(Response<Stations> stations, Retrofit retrofit) {
+
     }
 
     @Override
