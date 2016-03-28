@@ -16,6 +16,8 @@ import com.veinhorn.rwbytickets.search.rest.model.Stations;
 import com.veinhorn.rwbytickets.search.rest.service.RwStationsService;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -31,6 +33,14 @@ public class StationAutoCompleteAdapter extends BaseAdapter implements Filterabl
     private Retrofit retrofit;
     private RwStationsService stationsService;
 
+    private class ViewHolder {
+        TextView textView;
+
+        public ViewHolder(View item) {
+            textView = (TextView) item.findViewById(android.R.id.text1);
+        }
+    }
+
     public StationAutoCompleteAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         retrofit = RetrofitCreator.create();
@@ -38,11 +48,15 @@ public class StationAutoCompleteAdapter extends BaseAdapter implements Filterabl
     }
 
     @Override public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = inflater.inflate(android.R.layout.select_dialog_item,
-                    parent, false);
-            ((TextView)convertView).setText(getItem(position).getName());
+            convertView = inflater.inflate(android.R.layout.select_dialog_item, parent, false);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
+        viewHolder.textView.setText(getItem(position).getName());
         return convertView;
     }
 
@@ -65,9 +79,9 @@ public class StationAutoCompleteAdapter extends BaseAdapter implements Filterabl
                 FilterResults results = new FilterResults();
                 if (constraint != null) {
                     try {
-                        Stations stations = findStations("ru", constraint.toString());
-                        results.values = stations;
-                        results.count = stations.size();
+                        Stations s = findStations("ru", constraint.toString());
+                        results.values = s;
+                        results.count = s.size();
                     } catch (IOException e) {
                         Log.e(TAG, e.getMessage(), e);
                     }
@@ -79,6 +93,7 @@ public class StationAutoCompleteAdapter extends BaseAdapter implements Filterabl
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 if (results != null && results.count > 0) {
                     stations = (Stations) results.values;
+                    // Log.i(TAG, "Found stations: " + results.values.toString());
                     notifyDataSetChanged();
                 } else {
                     notifyDataSetInvalidated();
@@ -88,6 +103,8 @@ public class StationAutoCompleteAdapter extends BaseAdapter implements Filterabl
     }
 
     private Stations findStations(String lang, String name) throws IOException {
-        return stationsService.searchStations(lang, name).execute().body();
+        Response<Stations> response = stationsService.searchStations(lang, name).execute();
+        Log.i(TAG, "Try to search station: " + name + " by url: " + response.raw().request().url());
+        return response.body();
     }
 }

@@ -14,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <AutoCompleteTextView
+    <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
         android:hint="To"
+        android:inputType="textCapSentences"
         android:layout_below="@+id/fromStationEditText"
         android:id="@+id/toStationAutoCompleteTextView"
         android:layout_width="match_parent"

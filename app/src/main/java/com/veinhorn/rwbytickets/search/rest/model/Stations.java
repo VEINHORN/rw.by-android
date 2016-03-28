@@ -14,7 +14,7 @@ public class Stations {
 
     /** Finds and return station in @Station representetion by its name from @data */
     public Station getStation(String name) {
-        for (int i = 0; i < data.size(); i++) {
+        for (int i = 0; i < size(); i++) {
             if (data.get(i).equalsIgnoreCase(name)) return getStation(i);
         }
         return null;
@@ -43,5 +43,13 @@ public class Stations {
 
     public int size() {
         return data.size();
+    }
+
+    @Override public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < size(); i++) {
+            builder.append(getStation(i).getName() + ",");
+        }
+        return builder.toString();
     }
 }

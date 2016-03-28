@@ -3,14 +3,16 @@ package com.veinhorn.rwbytickets;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 import com.veinhorn.rwbytickets.search.StationAutoCompleteAdapter;
+import com.veinhorn.rwbytickets.search.rest.model.Station;
+import com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView;
 
 import butterknife.Bind;
 
@@ -26,24 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        toStationView = (AutoCompleteTextView) findViewById(R.id.toStationAutoCompleteTextView);
+        toStationView = (DelayAutoCompleteTextView) findViewById(R.id.toStationAutoCompleteTextView);
+        toStationView.setThreshold(2);
         toStationView.setAdapter(new StationAutoCompleteAdapter(this));
-
-        //toStationAutoCompleteTextView.addTextChangedListener();
-
-        // String[] languages = {"Java", "Java 1", "Java 2", "Java 3", "Java 4", "Java 5", "Scala", "Erlang", "lol", "ale", "nigger"};
-        // ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-        //        android.R.layout.select_dialog_item, languages);
-        // autoCompleteTextView.setThreshold(1);
-        // toStationAutoCompleteTextView.setAdapter(adapter);
-        // new TicketsLoader(this).execute();
-
-        fromStationView.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
-
-            @Override public void afterTextChanged(Editable s) {}
+        toStationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Station station = (Station) parent.getItemAtPosition(position);
+                toStationView.setText(station.getName());
+            }
         });
     }
 
