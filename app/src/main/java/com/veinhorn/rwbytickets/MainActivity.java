@@ -3,6 +3,8 @@ package com.veinhorn.rwbytickets;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AutoCompleteTextView;
@@ -10,18 +12,15 @@ import android.widget.EditText;
 
 import com.veinhorn.rwbytickets.rest.RetrofitCreator;
 import com.veinhorn.rwbytickets.rest.RwStationsService;
-import com.veinhorn.rwbytickets.rest.model.Stations;
+import com.veinhorn.rwbytickets.rest.callback.RestCallback;
 
 import butterknife.Bind;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity implements Callback<Stations> {
+public class MainActivity extends AppCompatActivity {
     @Bind(R.id.toolbar) protected Toolbar toolbar;
-    @Bind(R.id.fromStationEditText) protected EditText fromStationEditText;
-    private AutoCompleteTextView toStationAutoCompleteTextView; // butterknife cannot bind this ??
+    @Bind(R.id.fromStationEditText) protected EditText fromStationView;
+    private AutoCompleteTextView toStationView; // butterknife cannot bind this ??
 
     private Retrofit retrofit;
 
@@ -44,19 +43,16 @@ public class MainActivity extends AppCompatActivity implements Callback<Stations
         // toStationAutoCompleteTextView.setAdapter(adapter);
         // new TicketsLoader(this).execute();
 
+        fromStationView.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override public void afterTextChanged(Editable s) {}
+        });
+
         RwStationsService service = retrofit.create(RwStationsService.class);
-        service.searchStations("ru", "минск").enqueue(this);
-    }
-
-    @Override
-    public void onResponse(Call<Stations> call, Response<Stations> response) {
-        Stations stations = response.body();
-        Integer test = 0;
-    }
-
-    @Override
-    public void onFailure(Call<Stations> call, Throwable t) {
-        t.printStackTrace();
+        service.searchStations("ru", "минск").enqueue(new RestCallback());
     }
 
     @Override
