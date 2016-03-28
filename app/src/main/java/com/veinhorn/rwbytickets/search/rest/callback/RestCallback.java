@@ -1,6 +1,6 @@
-package com.veinhorn.rwbytickets.rest.callback;
+package com.veinhorn.rwbytickets.search.rest.callback;
 
-import com.veinhorn.rwbytickets.rest.model.Stations;
+import com.veinhorn.rwbytickets.search.rest.model.Stations;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -10,30 +10,25 @@ import android.view.MenuItem;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
-import com.veinhorn.rwbytickets.rest.RetrofitCreator;
-import com.veinhorn.rwbytickets.rest.service.RwStationsService;
-import com.veinhorn.rwbytickets.rest.callback.RestCallback;
+import com.veinhorn.rwbytickets.search.StationAutoCompleteAdapter;
 
 import butterknife.Bind;
-import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.toolbar) protected Toolbar toolbar;
     @Bind(R.id.fromStationEditText) protected EditText fromStationView;
     private AutoCompleteTextView toStationView; // butterknife cannot bind this ??
 
-    private Retrofit retrofit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        retrofit = RetrofitCreator.create();
-
         setSupportActionBar(toolbar);
 
-        //toStationAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.toStationAutoCompleteTextView);
+        toStationView = (AutoCompleteTextView) findViewById(R.id.toStationAutoCompleteTextView);
+        toStationView.setAdapter(new StationAutoCompleteAdapter(this));
+
         //toStationAutoCompleteTextView.addTextChangedListener();
 
         // String[] languages = {"Java", "Java 1", "Java 2", "Java 3", "Java 4", "Java 5", "Scala", "Erlang", "lol", "ale", "nigger"};
@@ -50,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override public void afterTextChanged(Editable s) {}
         });
-
-        RwStationsService service = retrofit.create(RwStationsService.class);
-        service.searchStations("ru", "минск").enqueue(new RestCallback());
     }
 
     @Override

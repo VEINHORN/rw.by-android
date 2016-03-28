@@ -1,4 +1,4 @@
-package com.veinhorn.rwbytickets.rest;
+package com.veinhorn.rwbytickets.search.rest;
 
 import com.veinhorn.rwbytickets.TicketsApp;
 

@@ -1,4 +1,4 @@
-package com.veinhorn.rwbytickets.rest.model;
+package com.veinhorn.rwbytickets.search.rest.model;
 
 /**
  * Created by veinhorn on 24.3.16.

@@ -1,4 +1,4 @@
-package com.veinhorn.rwbytickets.rest.model;
+package com.veinhorn.rwbytickets.search.rest.model;
 
 import java.util.List;
 
@@ -39,5 +39,9 @@ public class Stations {
 
     public List<String> getFullNames() {
         return full;
+    }
+
+    public int size() {
+        return data.size();
     }
 }
