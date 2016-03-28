@@ -1,4 +1,4 @@
-package com.veinhorn.rwbytickets.rest;
+package com.veinhorn.rwbytickets.rest.service;
 
 import com.veinhorn.rwbytickets.rest.model.Stations;
 

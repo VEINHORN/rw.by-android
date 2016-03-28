@@ -11,7 +11,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 import com.veinhorn.rwbytickets.rest.RetrofitCreator;
-import com.veinhorn.rwbytickets.rest.RwStationsService;
+import com.veinhorn.rwbytickets.rest.service.RwStationsService;
 import com.veinhorn.rwbytickets.rest.callback.RestCallback;
 
 import butterknife.Bind;
