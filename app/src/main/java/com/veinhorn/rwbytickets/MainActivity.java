@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.veinhorn.rwbytickets.search.StationAutoCompleteAdapter;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int DEFAULT_THRESHOLD = 2;
 
     @Bind(R.id.toolbar) protected Toolbar toolbar;
+    @Bind(R.id.continueButton) protected Button continueButton;
+
     private DelayAutoCompleteTextView fromStationView;
     private DelayAutoCompleteTextView toStationView; // butterknife cannot bind this ??
 
@@ -49,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Station station = (Station) parent.getItemAtPosition(position);
                 toStationView.setText(station.getName());
+            }
+        });
+
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                new TicketsLoader(MainActivity.this).execute();
             }
         });
     }
