@@ -17,9 +17,11 @@ import com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView;
 import butterknife.Bind;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int DEFAULT_THRESHOLD = 2;
+
     @Bind(R.id.toolbar) protected Toolbar toolbar;
-    @Bind(R.id.fromStationEditText) protected EditText fromStationView;
-    private AutoCompleteTextView toStationView; // butterknife cannot bind this ??
+    private DelayAutoCompleteTextView fromStationView;
+    private DelayAutoCompleteTextView toStationView; // butterknife cannot bind this ??
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        toStationView = (DelayAutoCompleteTextView) findViewById(R.id.toStationAutoCompleteTextView);
-        toStationView.setThreshold(2);
+        fromStationView = (DelayAutoCompleteTextView) findViewById(R.id.fromStationView);
+        fromStationView.setThreshold(DEFAULT_THRESHOLD);
+        fromStationView.setAdapter(new StationAutoCompleteAdapter(this));
+        fromStationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Station station = (Station) parent.getItemAtPosition(position);
+                fromStationView.setText(station.getName());
+            }
+        });
+
+        toStationView = (DelayAutoCompleteTextView) findViewById(R.id.toStationView);
+        toStationView.setThreshold(DEFAULT_THRESHOLD);
         toStationView.setAdapter(new StationAutoCompleteAdapter(this));
         toStationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

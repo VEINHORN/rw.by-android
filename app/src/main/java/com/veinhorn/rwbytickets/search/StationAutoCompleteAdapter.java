@@ -16,8 +16,6 @@ import com.veinhorn.rwbytickets.search.rest.model.Stations;
 import com.veinhorn.rwbytickets.search.rest.service.RwStationsService;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Response;
 import retrofit2.Retrofit;

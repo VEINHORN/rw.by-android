@@ -8,25 +8,27 @@
     tools:context="com.veinhorn.rwbytickets.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <EditText
+    <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
+        android:id="@+id/fromStationView"
         android:hint="From"
-        android:id="@+id/fromStationEditText"
+        android:inputType="textCapSentences"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
+        android:id="@+id/toStationView"
+        android:layout_below="@+id/fromStationView"
         android:hint="To"
         android:inputType="textCapSentences"
-        android:layout_below="@+id/fromStationEditText"
-        android:id="@+id/toStationAutoCompleteTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/okButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Continue"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/toStationAutoCompleteTextView"
-        android:layout_alignStart="@+id/toStationAutoCompleteTextView" />
+        android:layout_alignLeft="@+id/toStationView"
+        android:layout_alignStart="@+id/toStationView" />
 </RelativeLayout>
