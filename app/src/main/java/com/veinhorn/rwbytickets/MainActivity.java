@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 
+import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.veinhorn.rwbytickets.search.StationAutoCompleteAdapter;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import com.veinhorn.rwbytickets.search.rest.model.Station;
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        // Build navigation drawer
+        new DrawerBuilder().withActivity(this)
+                .withToolbar(toolbar).build();
+
 
         fromStationView.setThreshold(DEFAULT_THRESHOLD);
         fromStationView.setAdapter(new StationAutoCompleteAdapter(this));
