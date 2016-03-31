@@ -9,13 +9,12 @@ import android.view.MenuItem;
 
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
-import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    private PurchaseDialog purchaseDialog; // init when user click on continue button
+    // private PurchaseDialog purchaseDialog; // init when user click on continue button
 
     @Bind(R.id.toolbar) protected Toolbar toolbar;
     @Bind(R.id.viewPager) protected ViewPager viewPager;
@@ -32,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
         new DrawerBuilder().withActivity(this)
                 .withToolbar(toolbar).build();
 
-        PurchasePagerAdapter adapter = new PurchasePagerAdapter(
-                getSupportFragmentManager(), purchaseDialog);
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(new PurchasePagerAdapter(getSupportFragmentManager()));
     }
 
     @Override

@@ -14,11 +14,15 @@ import com.veinhorn.rwbytickets.purchase.fragments.TrainFragment;
  */
 public class PurchasePagerAdapter extends FragmentPagerAdapter {
 
-    private PurchaseDialog purchaseDialog;
+    private static PurchaseDialog purchaseDialog;
 
-    public PurchasePagerAdapter(FragmentManager fragmentManager, PurchaseDialog purchaseDialog) {
+    public PurchasePagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
-        this.purchaseDialog = purchaseDialog;
+        purchaseDialog = new PurchaseDialog();
+    }
+
+    public static PurchaseDialog getPurchaseDialog() {
+        return purchaseDialog;
     }
 
     @Override

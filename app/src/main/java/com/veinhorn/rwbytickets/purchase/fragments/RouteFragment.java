@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 
 import com.veinhorn.rwbytickets.R;
+import com.veinhorn.rwbytickets.TicketsLoader;
+import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import com.veinhorn.rwbytickets.search.StationAutoCompleteAdapter;
 import com.veinhorn.rwbytickets.search.rest.model.Station;
@@ -58,11 +60,10 @@ public class RouteFragment extends Fragment {
         return rootView;
     }
 
+    /** Make auth, confirm rules, and make search requests for stations */
     @OnClick(R.id.continueButton) public void continuePurchase() {
-
-        // Init purchase dialog
-        // purchaseDialog = new PurchaseDialog();
-        // new TicketsLoader(this, purchaseDialog).execute();
+        PurchaseDialog purchaseDialog = PurchasePagerAdapter.getPurchaseDialog();
+        new TicketsLoader(getActivity(), purchaseDialog).execute();
     }
 
     public static RouteFragment newInstance(PurchaseDialog purchaseDialog) {

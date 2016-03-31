@@ -12,6 +12,7 @@ import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import java.io.IOException;
 
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
 /**
  * Created by veinhorn on 21.3.16.
@@ -40,7 +41,8 @@ public class TicketsLoader extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         try {
             Action action = new SignInAction(context);
-            action.doAction(dialog);
+            Response signInResponse = action.doAction(dialog);
+            Integer test123 = new Integer(234);
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);
             Toast.makeText(context, "Cannot sign in", Toast.LENGTH_SHORT).show();
