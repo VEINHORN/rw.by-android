@@ -1,4 +1,4 @@
-package com.veinhorn.rwbytickets;
+package com.veinhorn.rwbytickets.purchase.dialog;
 
 import com.veinhorn.rwbytickets.search.rest.model.Station;
 

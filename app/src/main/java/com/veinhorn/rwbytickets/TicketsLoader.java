@@ -5,8 +5,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.veinhorn.rwbytickets.search.action.Action;
-import com.veinhorn.rwbytickets.search.action.SignInAction;
+import com.veinhorn.rwbytickets.action.Action;
+import com.veinhorn.rwbytickets.action.SignInAction;
+import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 
 import java.io.IOException;
 

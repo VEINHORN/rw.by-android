@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 
 import com.veinhorn.rwbytickets.search.StationAutoCompleteAdapter;
+import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import com.veinhorn.rwbytickets.search.rest.model.Station;
 import com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView;
 
@@ -19,7 +20,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
     private static final int DEFAULT_THRESHOLD = 2;
-    private PurchaseDialog purchaseDialog;
+    private PurchaseDialog purchaseDialog; // init when user click on continue button
 
     @Bind(R.id.toolbar) protected Toolbar toolbar;
     @Bind(R.id.continueButton) protected Button continueButton;
@@ -34,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-
-        // Init purchase dialog
-        purchaseDialog = new PurchaseDialog();
 
         fromStationView.setThreshold(DEFAULT_THRESHOLD);
         fromStationView.setAdapter(new StationAutoCompleteAdapter(this));
@@ -60,7 +58,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.continueButton) public void continuePurchase() {
-        new TicketsLoader(this, purchaseDialog).execute();
+
+        // Init purchase dialog
+        purchaseDialog = new PurchaseDialog();
+        // new TicketsLoader(this, purchaseDialog).execute();
     }
 
     @Override

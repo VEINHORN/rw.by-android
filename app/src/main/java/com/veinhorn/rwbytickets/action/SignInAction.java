@@ -1,8 +1,8 @@
-package com.veinhorn.rwbytickets.search.action;
+package com.veinhorn.rwbytickets.action;
 
 import android.content.Context;
 
-import com.veinhorn.rwbytickets.PurchaseDialog;
+import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import com.veinhorn.rwbytickets.R;
 import com.veinhorn.rwbytickets.TicketsApp;
 
