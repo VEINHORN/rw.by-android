@@ -19,6 +19,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
     private static final int DEFAULT_THRESHOLD = 2;
+    private PurchaseDialog purchaseDialog;
 
     @Bind(R.id.toolbar) protected Toolbar toolbar;
     @Bind(R.id.continueButton) protected Button continueButton;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+
+        // Init purchase dialog
+        purchaseDialog = new PurchaseDialog();
 
         fromStationView.setThreshold(DEFAULT_THRESHOLD);
         fromStationView.setAdapter(new StationAutoCompleteAdapter(this));
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.continueButton) public void continuePurchase() {
-        new TicketsLoader(this).execute();
+        new TicketsLoader(this, purchaseDialog).execute();
     }
 
     @Override
