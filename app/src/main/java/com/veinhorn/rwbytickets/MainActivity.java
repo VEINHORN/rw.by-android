@@ -1,33 +1,24 @@
 package com.veinhorn.rwbytickets;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.veinhorn.rwbytickets.search.StationAutoCompleteAdapter;
+import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
-import com.veinhorn.rwbytickets.search.rest.model.Station;
-import com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int DEFAULT_THRESHOLD = 2;
     private PurchaseDialog purchaseDialog; // init when user click on continue button
 
     @Bind(R.id.toolbar) protected Toolbar toolbar;
-    @Bind(R.id.continueButton) protected Button continueButton;
-
-    @Bind(R.id.fromStationView) protected DelayAutoCompleteTextView fromStationView;
-    @Bind(R.id.toStationView) protected DelayAutoCompleteTextView toStationView; // butterknife cannot bind this ??
+    @Bind(R.id.viewPager) protected ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,33 +31,7 @@ public class MainActivity extends AppCompatActivity {
         new DrawerBuilder().withActivity(this)
                 .withToolbar(toolbar).build();
 
-
-        fromStationView.setThreshold(DEFAULT_THRESHOLD);
-        fromStationView.setAdapter(new StationAutoCompleteAdapter(this));
-        fromStationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Station station = (Station) parent.getItemAtPosition(position);
-                fromStationView.setText(station.getName());
-            }
-        });
-
-        toStationView.setThreshold(DEFAULT_THRESHOLD);
-        toStationView.setAdapter(new StationAutoCompleteAdapter(this));
-        toStationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Station station = (Station) parent.getItemAtPosition(position);
-                toStationView.setText(station.getName());
-            }
-        });
-    }
-
-    @OnClick(R.id.continueButton) public void continuePurchase() {
-
-        // Init purchase dialog
-        purchaseDialog = new PurchaseDialog();
-        // new TicketsLoader(this, purchaseDialog).execute();
+        viewPager.setAdapter(new PurchasePagerAdapter(getSupportFragmentManager(), purchaseDialog));
     }
 
     @Override

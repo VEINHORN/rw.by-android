@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
+        android:id="@+id/fromStationView"
+        android:hint="From"
+        android:inputType="textCapSentences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
+        android:id="@+id/toStationView"
+        android:layout_below="@+id/fromStationView"
+        android:hint="To"
+        android:inputType="textCapSentences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/toStationView"
+        android:layout_alignStart="@+id/toStationView" />
+
+</RelativeLayout>
