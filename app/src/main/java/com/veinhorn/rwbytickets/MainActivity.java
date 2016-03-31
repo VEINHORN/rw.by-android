@@ -26,12 +26,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        toolbar.setTitle("Purchase");
         setSupportActionBar(toolbar);
         // Build navigation drawer
         new DrawerBuilder().withActivity(this)
                 .withToolbar(toolbar).build();
 
-        viewPager.setAdapter(new PurchasePagerAdapter(getSupportFragmentManager(), purchaseDialog));
+        PurchasePagerAdapter adapter = new PurchasePagerAdapter(
+                getSupportFragmentManager(), purchaseDialog);
+        viewPager.setAdapter(adapter);
     }
 
     @Override
