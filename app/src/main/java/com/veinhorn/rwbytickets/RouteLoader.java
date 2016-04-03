@@ -17,15 +17,15 @@ import okhttp3.Response;
 /**
  * Created by veinhorn on 21.3.16.
  */
-public class TicketsLoader extends AsyncTask<String, Void, String> {
+public class RouteLoader extends AsyncTask<String, Void, String> {
 
-    private static final String TAG = TicketsLoader.class.getName();
+    private static final String TAG = RouteLoader.class.getName();
 
     private Context context;
     private OkHttpClient httpClient;
     private PurchaseDialog purchaseDialog;
 
-    public TicketsLoader(Context context, PurchaseDialog purchaseDialog) {
+    public RouteLoader(Context context, PurchaseDialog purchaseDialog) {
         this.context = context;
         httpClient = TicketsApp.httpClient;
         this.purchaseDialog = purchaseDialog;
@@ -35,7 +35,6 @@ public class TicketsLoader extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         try {
             Response signInResponse = new SignInAction(context).doAction(purchaseDialog);
-            Integer test1 = 234;
             Response acceptRulesResponse = new AcceptRulesAction().doAction(purchaseDialog);
             Integer test2 = 345;
         } catch (IOException e) {

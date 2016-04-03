@@ -12,7 +12,7 @@ public class Stations {
     protected List<String> data;
     protected List<String> full;
 
-    /** Finds and return station in @Station representetion by its name from @data */
+    /** Finds and return station in @Station representation by its name from @data */
     public Station getStation(String name) {
         for (int i = 0; i < size(); i++) {
             if (data.get(i).equalsIgnoreCase(name)) return getStation(i);

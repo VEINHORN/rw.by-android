@@ -43,6 +43,11 @@ public class StationAutoCompleteAdapter extends BaseAdapter implements Filterabl
         inflater = LayoutInflater.from(context);
         retrofit = RetrofitCreator.create();
         stationsService = retrofit.create(RwStationsService.class);
+        stations = new Stations();
+    }
+
+    public Stations getStations() {
+        return stations;
     }
 
     @Override public View getView(int position, View convertView, ViewGroup parent) {

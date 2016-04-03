@@ -25,17 +25,18 @@ import okhttp3.Response;
 /**
  * Created by veinhorn on 30.3.16.
  */
-public class SignInAction implements Action {
+public class SignInAction extends BaseAction {
 
-    private static final String BASE_URL = "https://poezd.rw.by";
     private static final String SIGN_IN_PAGE_URL = "https://poezd.rw.by/wps/portal/home/login_main";
 
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
+    private static final String REMEMBER = "on";
 
     // From this "input" names form send values to the rw.by server
     private static final String RW_LOGIN_FORM_ID = "login";
     private static final String RW_PASSWORD_FORM_ID = "password";
+    private static final String RW_REMEMBER_FORM_ID = "rememberUser";
     // HTML
     private static final String RW_ACTION_ATTR_NAME = "action";
 
@@ -59,13 +60,17 @@ public class SignInAction implements Action {
         // Do Sign In request
         Response signInResponse = httpClient.newCall(signInRequest).execute();
         // Fill purchase dialog
-        fillPurchaseDialog(dialog, signInResponse);
+        fillPurchaseDialog(dialog, signInResponse, creds);
+
         return signInResponse;
     }
 
-    private void fillPurchaseDialog(PurchaseDialog dialog, Response currentResponse) {
+    /** Change dialog status and several other parameters */
+    private void fillPurchaseDialog(PurchaseDialog dialog,
+                                    Response currentResponse, Map<String, String> creds) {
         dialog.setCurrentResponse(currentResponse);
         dialog.setDialogStatus(DialogStatus.ACCEPT_RULES);
+        dialog.setCredentials(creds);
     }
 
     private Request createSignInRequest(String signInUrl, Map<String, String> creds) {
@@ -80,6 +85,7 @@ public class SignInAction implements Action {
         return new FormBody.Builder()
                 .add(RW_LOGIN_FORM_ID, creds.get(LOGIN))
                 .add(RW_PASSWORD_FORM_ID, creds.get(PASSWORD))
+                // .add(RW_REMEMBER_FORM_ID, creds.get(REMEMBER)) // "on" or don't send
                 .build();
     }
 

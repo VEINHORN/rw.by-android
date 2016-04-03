@@ -2,6 +2,11 @@ package com.veinhorn.rwbytickets;
 
 import android.app.Application;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+
+import okhttp3.CookieJar;
 import okhttp3.OkHttpClient;
 
 /**
@@ -13,6 +18,11 @@ public class TicketsApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        httpClient = new OkHttpClient();
+        CookieJar cookieJar = new PersistentCookieJar(
+                new SetCookieCache(), new SharedPrefsCookiePersistor(getBaseContext())
+        );
+        httpClient = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
     }
 }
