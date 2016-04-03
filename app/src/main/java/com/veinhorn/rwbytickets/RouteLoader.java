@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.veinhorn.rwbytickets.action.ConfirmRulesAction;
+import com.veinhorn.rwbytickets.action.SelectRouteAction;
 import com.veinhorn.rwbytickets.action.SignInAction;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 
@@ -36,6 +37,7 @@ public class RouteLoader extends AsyncTask<String, Void, String> {
         try {
             Response signInResponse = new SignInAction(context).doAction(purchaseDialog);
             Response acceptRulesResponse = new ConfirmRulesAction().doAction(purchaseDialog);
+            Response selectRouteResponse = new SelectRouteAction().doAction(purchaseDialog);
             Integer test2 = 345;
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);

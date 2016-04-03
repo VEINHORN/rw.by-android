@@ -20,12 +20,9 @@ import okhttp3.Response;
 public class ConfirmRulesAction extends BaseAction {
 
     private static final String RW_FORM_ACCEPT_RULES_ID = "viewns_7_48QFVAUK6HA180IQAQVJU80004_:form1";
-    private static final String RW_INPUT_CHECKBOX_ID = "viewns_7_48QFVAUK6HA180IQAQVJU80004_:form1:conf";
-    private static final String RW_INPUT_CONTINUE_BUTTON_ID = "viewns_7_48QFVAUK6HA180IQAQVJU80004_:form1:nextBtn";
+    private static final String RW_INPUT_CHECKBOX_ID = RW_FORM_ACCEPT_RULES_ID + ":conf";
+    private static final String RW_INPUT_CONTINUE_BUTTON_ID = RW_FORM_ACCEPT_RULES_ID + ":nextBtn";
     private static final String RW_INPUT_FACES_ID = "com.sun.faces.VIEW";
-
-    // HTML
-    private static final String RW_ACTION_ATTR_NAME = "action";
 
     private OkHttpClient httpClient;
 

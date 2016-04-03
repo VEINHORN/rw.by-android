@@ -112,6 +112,9 @@ public class RouteFragment extends Fragment {
         Station toStation = toStationAdapter.getStations().getStation(toStationInput);
         purchaseDialog.setFromStation(fromStation);
         purchaseDialog.setToStation(toStation);
+        purchaseDialog.setAdults(1);
+        purchaseDialog.setChildren(0);
+        purchaseDialog.setChildrenNoPlaces(0);
         // TODO: Add here additional parameters3
     }
 

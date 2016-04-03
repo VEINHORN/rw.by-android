@@ -10,14 +10,42 @@ import okhttp3.Response;
  * Created by veinhorn on 30.3.16.
  */
 public class PurchaseDialog {
-
+    // Purchase data
     private Station fromStation;
     private Station toStation;
+    private Integer adults;
+    private Integer children;
+    private Integer childrenNoPlaces;
+    //
 
     private Response currentResponse;
     private DialogStatus dialogStatus;
 
     private Map<String, String> credentials;
+
+    public void setChildrenNoPlaces(Integer childrenNoPlaces) {
+        this.childrenNoPlaces = childrenNoPlaces;
+    }
+
+    public Integer getChildrenNoPlaces() {
+        return childrenNoPlaces;
+    }
+
+    public void setChildren(Integer children) {
+        this.children = children;
+    }
+
+    public Integer getChildren() {
+        return children;
+    }
+
+    public void setAdults(Integer adults) {
+        this.adults = adults;
+    }
+
+    public Integer getAdults() {
+        return adults;
+    }
 
     public void setCredentials(Map<String, String> credentials) {
         this.credentials = credentials;

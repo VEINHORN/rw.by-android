@@ -5,4 +5,6 @@ package com.veinhorn.rwbytickets.action;
  */
 public abstract class BaseAction implements Action {
     public static final String BASE_URL = "https://poezd.rw.by";
+    // HTML
+    protected static final String RW_ACTION_ATTR_NAME = "action";
 }

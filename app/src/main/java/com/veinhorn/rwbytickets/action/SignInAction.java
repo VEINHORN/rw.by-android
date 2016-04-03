@@ -37,8 +37,6 @@ public class SignInAction extends BaseAction {
     private static final String RW_LOGIN_FORM_ID = "login";
     private static final String RW_PASSWORD_FORM_ID = "password";
     private static final String RW_REMEMBER_FORM_ID = "rememberUser";
-    // HTML
-    private static final String RW_ACTION_ATTR_NAME = "action";
 
     private Context context;
     private OkHttpClient httpClient;
