@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.veinhorn.rwbytickets.R;
@@ -30,6 +32,11 @@ public class RouteFragment extends Fragment {
 
     @Bind(R.id.fromStationView) protected DelayAutoCompleteTextView fromStationView;
     @Bind(R.id.toStationView) protected DelayAutoCompleteTextView toStationView;
+
+    @Bind(R.id.adultSpinner) protected Spinner adultSpinner;
+    @Bind(R.id.childWithPlaceSpinner) protected Spinner childWithPlaceSpinner;
+    @Bind(R.id.childWithoutPlaceSpinner) protected Spinner childWithoutPlaceSpinner;
+
     @Bind(R.id.continueButton) protected Button continueButton;
 
     private StationAutoCompleteAdapter fromStationAdapter;
@@ -62,6 +69,24 @@ public class RouteFragment extends Fragment {
                 toStationView.setText(station.getName());
             }
         });
+
+        // Add spinner for adult passengers
+        ArrayAdapter<CharSequence> adultAdapter = ArrayAdapter.createFromResource(activity,
+                R.array.adult, android.R.layout.simple_spinner_item);
+        adultAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adultSpinner.setAdapter(adultAdapter);
+
+        // Add spinner for child with places passengers
+        ArrayAdapter<CharSequence> childWithPlacesAdapter = ArrayAdapter.createFromResource(activity,
+                R.array.child_with_place, android.R.layout.simple_spinner_item);
+        childWithPlacesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        childWithPlaceSpinner.setAdapter(childWithPlacesAdapter);
+
+        // Add spinner for child without places passengers
+        ArrayAdapter<CharSequence> childWithoutPlacesAdapter = ArrayAdapter.createFromResource(activity,
+                R.array.child_without_place, android.R.layout.simple_spinner_item);
+        childWithoutPlacesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        childWithoutPlaceSpinner.setAdapter(childWithoutPlacesAdapter);
 
         return rootView;
     }

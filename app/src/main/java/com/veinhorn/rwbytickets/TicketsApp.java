@@ -18,9 +18,11 @@ public class TicketsApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Set up persistent cache that will be stored in shared prefs
         CookieJar cookieJar = new PersistentCookieJar(
                 new SetCookieCache(), new SharedPrefsCookiePersistor(getBaseContext())
         );
+        // Set up singleton http client
         httpClient = new OkHttpClient.Builder()
                 .cookieJar(cookieJar)
                 .build();
