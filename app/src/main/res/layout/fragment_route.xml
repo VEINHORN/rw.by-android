@@ -50,4 +50,25 @@
         android:layout_alignLeft="@+id/toStationView"
         android:layout_alignStart="@+id/toStationView" />
 
+    <TextView
+        android:text="ER"
+        android:id="@+id/electronicRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/childWithoutPlaceSpinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp" />
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/switchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/childWithoutPlaceSpinner"
+        android:layout_toRightOf="@+id/electronicRegistration"
+        android:layout_toEndOf="@+id/electronicRegistration"
+        android:layout_marginLeft="39dp"
+        android:layout_marginStart="39dp" />
+
 </RelativeLayout>

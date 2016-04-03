@@ -32,4 +32,5 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.1.6@aar') {
         transitive = true
     }
+    compile 'com.kyleduo.switchbutton:library:1.4.0'
 }

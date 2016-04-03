@@ -33,9 +33,8 @@ public class ConfirmRulesAction extends BaseAction {
         httpClient = TicketsApp.httpClient;
     }
 
-    // May produce NullPointerException
     @Override public Response doAction(PurchaseDialog dialog) throws Exception {
-        Response signInResponse = dialog.getCurrentResponse(); // get sign in response
+        Response signInResponse = dialog.getCurrentResponse();
 
         // Fetch information from input for future request creation
         Document document = Jsoup.parse(signInResponse.body().string());
