@@ -14,7 +14,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    // private PurchaseDialog purchaseDialog; // init when user click on continue button
 
     @Bind(R.id.toolbar) protected Toolbar toolbar;
     @Bind(R.id.viewPager) protected ViewPager viewPager;

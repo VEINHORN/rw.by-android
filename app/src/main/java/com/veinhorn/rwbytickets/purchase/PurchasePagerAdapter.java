@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.Toolbar;
 
+import com.veinhorn.rwbytickets.purchase.dialog.DialogStatus;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import com.veinhorn.rwbytickets.purchase.fragments.RouteFragment;
 import com.veinhorn.rwbytickets.purchase.fragments.TrainFragment;
@@ -18,7 +19,12 @@ public class PurchasePagerAdapter extends FragmentPagerAdapter {
 
     public PurchasePagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
+        initPurchaseDialog();
+    }
+
+    private void initPurchaseDialog() {
         purchaseDialog = new PurchaseDialog();
+        purchaseDialog.setDialogStatus(DialogStatus.SIGN_IN);
     }
 
     public static PurchaseDialog getPurchaseDialog() {

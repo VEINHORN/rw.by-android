@@ -5,7 +5,7 @@
     <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
         android:id="@+id/fromStationView"
         android:hint="From"
-        android:inputType="textCapSentences"
+        android:inputType="textCapCharacters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -13,7 +13,7 @@
         android:id="@+id/toStationView"
         android:layout_below="@+id/fromStationView"
         android:hint="To"
-        android:inputType="textCapSentences"
+        android:inputType="textCapCharacters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -2,9 +2,10 @@ package com.veinhorn.rwbytickets.action;
 
 import android.content.Context;
 
-import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import com.veinhorn.rwbytickets.R;
 import com.veinhorn.rwbytickets.TicketsApp;
+import com.veinhorn.rwbytickets.purchase.dialog.DialogStatus;
+import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -57,7 +58,14 @@ public class SignInAction implements Action {
         Request signInRequest = createSignInRequest(signInUrl, creds);
         // Do Sign In request
         Response signInResponse = httpClient.newCall(signInRequest).execute();
+        // Fill purchase dialog
+        fillPurchaseDialog(dialog, signInResponse);
         return signInResponse;
+    }
+
+    private void fillPurchaseDialog(PurchaseDialog dialog, Response currentResponse) {
+        dialog.setCurrentResponse(currentResponse);
+        dialog.setDialogStatus(DialogStatus.ACCEPT_RULES);
     }
 
     private Request createSignInRequest(String signInUrl, Map<String, String> creds) {
@@ -84,7 +92,7 @@ public class SignInAction implements Action {
         Response res = httpClient.newCall(req).execute();
         Document document = Jsoup.parse(res.body().string());
         Element loginForm = document.getElementById(RW_LOGIN_FORM_ID);
-        return loginForm.attr("action");
+        return loginForm.attr(RW_ACTION_ATTR_NAME);
     }
 
     private Map<String, String> loadCredentials() throws IOException {
