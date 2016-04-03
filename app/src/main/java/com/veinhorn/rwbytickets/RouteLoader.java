@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.veinhorn.rwbytickets.action.AcceptRulesAction;
+import com.veinhorn.rwbytickets.action.ConfirmRulesAction;
 import com.veinhorn.rwbytickets.action.SignInAction;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 
@@ -35,11 +35,14 @@ public class RouteLoader extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         try {
             Response signInResponse = new SignInAction(context).doAction(purchaseDialog);
-            Response acceptRulesResponse = new AcceptRulesAction().doAction(purchaseDialog);
+            Response acceptRulesResponse = new ConfirmRulesAction().doAction(purchaseDialog);
             Integer test2 = 345;
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);
             Toast.makeText(context, "Something went in pay dialog", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            Toast.makeText(context, "Parse error by the way", Toast.LENGTH_SHORT).show();
         }
         return "";
     }

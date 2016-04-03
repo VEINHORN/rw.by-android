@@ -55,7 +55,7 @@ public class SignInAction extends BaseAction {
         Map<String, String> creds = loadCredentials();
         // Get correct sign in url
         String signInUrl = createSignInUrl(fetchSignInActionUrl());
-        // Sign In
+        // Sign In request creation
         Request signInRequest = createSignInRequest(signInUrl, creds);
         // Do Sign In request
         Response signInResponse = httpClient.newCall(signInRequest).execute();
@@ -67,8 +67,8 @@ public class SignInAction extends BaseAction {
 
     /** Change dialog status and several other parameters */
     private void fillPurchaseDialog(PurchaseDialog dialog,
-                                    Response currentResponse, Map<String, String> creds) {
-        dialog.setCurrentResponse(currentResponse);
+                                    Response signInResponse, Map<String, String> creds) {
+        dialog.setCurrentResponse(signInResponse);
         dialog.setDialogStatus(DialogStatus.ACCEPT_RULES);
         dialog.setCredentials(creds);
     }

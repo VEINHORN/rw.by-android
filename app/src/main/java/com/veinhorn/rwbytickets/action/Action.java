@@ -10,5 +10,5 @@ import okhttp3.Response;
  * Created by veinhorn on 30.3.16.
  */
 public interface Action {
-    Response doAction(PurchaseDialog dialog) throws IOException;
+    Response doAction(PurchaseDialog dialog) throws IOException, Exception;
 }
