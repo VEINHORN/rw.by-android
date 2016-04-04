@@ -1,45 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-
-    <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
-        android:id="@+id/fromStationView"
-        android:hint="From"
-        android:inputType="textCapCharacters"
+    <RelativeLayout
+        android:background="#225076"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
-        android:id="@+id/toStationView"
-        android:layout_below="@+id/fromStationView"
-        android:hint="To"
-        android:inputType="textCapCharacters"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
+            android:id="@+id/fromStationView"
+            android:hint="From"
+            android:textCursorDrawable="@null"
+            android:inputType="textCapCharacters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#e5dede"
+            android:textSize="25sp"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="15dp"
+            android:textColorHint="#a09d9d"
+            android:textColor="#605e5e" />
 
-    <Spinner
-        android:id="@+id/adultSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toStationView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
+            android:id="@+id/toStationView"
+            android:hint="To"
+            android:textCursorDrawable="@null"
+            android:inputType="textCapCharacters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#e5dede"
+            android:layout_below="@+id/fromStationView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="25sp"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
+            android:textColorHint="#a09d9d"
+            android:textColor="#605e5e" />
 
-    <Spinner
-        android:id="@+id/childWithPlaceSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/adultSpinner"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <EditText
+            android:id="@+id/whenView"
+            android:textCursorDrawable="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toStationView"
+            android:hint="When"
+            android:background="#e5dede"
+            android:textColorHint="#a09d9d"
+            android:textSize="25sp"
+            android:layout_marginRight="50dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_alignLeft="@+id/toStationView"
+            android:layout_alignStart="@+id/toStationView"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#605e5e"
+            android:focusable="false" />
 
-    <Spinner
-        android:id="@+id/childWithoutPlaceSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/childWithPlaceSpinner"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <Spinner
+            android:id="@+id/adultSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/whenView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="5dp" />
+
+        <Spinner
+            android:id="@+id/childWithPlaceSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adultSpinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="5dp" />
+
+        <Spinner
+            android:id="@+id/childWithoutPlaceSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/childWithPlaceSpinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:text="ER"
+            android:id="@+id/electronicRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/childWithoutPlaceSpinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="38dp"
+            android:layout_marginStart="38dp" />
+
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/switchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/childWithoutPlaceSpinner"
+            android:layout_toRightOf="@+id/electronicRegistration"
+            android:layout_toEndOf="@+id/electronicRegistration"
+            android:layout_marginLeft="39dp"
+            android:layout_marginStart="39dp" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/continueButton"
@@ -47,28 +124,7 @@
         android:layout_height="wrap_content"
         android:text="Continue"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/toStationView"
-        android:layout_alignStart="@+id/toStationView" />
-
-    <TextView
-        android:text="ER"
-        android:id="@+id/electronicRegistration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/childWithoutPlaceSpinner"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="38dp"
-        android:layout_marginStart="38dp" />
-
-    <com.kyleduo.switchbutton.SwitchButton
-        android:id="@+id/switchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/childWithoutPlaceSpinner"
-        android:layout_toRightOf="@+id/electronicRegistration"
-        android:layout_toEndOf="@+id/electronicRegistration"
-        android:layout_marginLeft="39dp"
-        android:layout_marginStart="39dp" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

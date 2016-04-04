@@ -1,5 +1,6 @@
 package com.veinhorn.rwbytickets;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        toolbar.setBackgroundColor(Color.parseColor("#212121"));
         toolbar.setTitle("Purchase");
         setSupportActionBar(toolbar);
         // Build navigation drawer
