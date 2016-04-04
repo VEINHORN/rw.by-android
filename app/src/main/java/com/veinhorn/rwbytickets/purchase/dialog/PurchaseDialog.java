@@ -13,6 +13,7 @@ public class PurchaseDialog {
     // Purchase data
     private Station fromStation;
     private Station toStation;
+    private String whenDate;
     private Integer adults;
     private Integer children;
     private Integer childrenNoPlaces;
@@ -22,6 +23,14 @@ public class PurchaseDialog {
     private DialogStatus dialogStatus;
 
     private Map<String, String> credentials;
+
+    public String getWhenDate() {
+        return whenDate;
+    }
+
+    public void setWhenDate(String whenDate) {
+        this.whenDate = whenDate;
+    }
 
     public void setChildrenNoPlaces(Integer childrenNoPlaces) {
         this.childrenNoPlaces = childrenNoPlaces;

@@ -33,5 +33,5 @@ dependencies {
         transitive = true
     }
     compile 'com.kyleduo.switchbutton:library:1.4.0'
-    compile 'com.wdullaer:materialdatetimepicker:2.3.0'
+    compile 'com.code-troopers.betterpickers:library:2.5.2'
 }

@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 import com.veinhorn.rwbytickets.R;
 import com.veinhorn.rwbytickets.RouteLoader;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
@@ -19,6 +21,8 @@ import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import com.veinhorn.rwbytickets.search.StationAutoCompleteAdapter;
 import com.veinhorn.rwbytickets.search.rest.model.Station;
 import com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView;
+
+import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,6 +36,7 @@ public class RouteFragment extends Fragment {
 
     @Bind(R.id.fromStationView) protected DelayAutoCompleteTextView fromStationView;
     @Bind(R.id.toStationView) protected DelayAutoCompleteTextView toStationView;
+    @Bind(R.id.whenView) protected EditText whenView;
 
     @Bind(R.id.adultSpinner) protected Spinner adultSpinner;
     @Bind(R.id.childWithPlaceSpinner) protected Spinner childWithPlaceSpinner;
@@ -89,6 +94,21 @@ public class RouteFragment extends Fragment {
         childWithoutPlaceSpinner.setAdapter(childWithoutPlacesAdapter);
 
         return rootView;
+    }
+
+    @OnClick(R.id.whenView) public void selectDate() {
+        CalendarDatePickerDialogFragment dialog = new CalendarDatePickerDialogFragment()
+                .setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
+                        PurchaseDialog purchaseDialog = PurchasePagerAdapter.getPurchaseDialog();
+                        purchaseDialog.setWhenDate(year + "." + monthOfYear + "." + dayOfMonth);
+                        whenView.setText(year + " / " + monthOfYear + " / " + dayOfMonth);
+                    }
+                })
+                .setFirstDayOfWeek(Calendar.MONDAY)
+                .setThemeDark(true);
+        dialog.show(getFragmentManager(), "Select date");
     }
 
     /** Make auth, confirm rules, and make search requests for stations */
