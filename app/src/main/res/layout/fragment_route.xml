@@ -8,6 +8,7 @@
 
         <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
             android:id="@+id/fromStationView"
+            android:drawableLeft="@drawable/ic_my_location_black_24dp"
             android:hint="From"
             android:textCursorDrawable="@null"
             android:inputType="textCapCharacters"
@@ -27,6 +28,7 @@
 
         <com.veinhorn.rwbytickets.search.view.DelayAutoCompleteTextView
             android:id="@+id/toStationView"
+            android:drawableLeft="@drawable/ic_place_black_24dp"
             android:hint="To"
             android:textCursorDrawable="@null"
             android:inputType="textCapCharacters"
@@ -49,6 +51,7 @@
 
         <EditText
             android:id="@+id/whenView"
+            android:drawableLeft="@drawable/ic_today_black_24dp"
             android:textCursorDrawable="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
