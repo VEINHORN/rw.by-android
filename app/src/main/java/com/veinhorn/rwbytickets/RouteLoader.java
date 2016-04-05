@@ -9,6 +9,7 @@ import com.veinhorn.rwbytickets.action.ConfirmRulesAction;
 import com.veinhorn.rwbytickets.action.SelectRouteAction;
 import com.veinhorn.rwbytickets.action.SignInAction;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
+import com.veinhorn.rwbytickets.purchase.fetchers.AvailableTrainsFetcher;
 
 import java.io.IOException;
 
@@ -38,7 +39,12 @@ public class RouteLoader extends AsyncTask<String, Void, String> {
             Response signInResponse = new SignInAction(context).doAction(purchaseDialog);
             Response acceptRulesResponse = new ConfirmRulesAction().doAction(purchaseDialog);
             Response selectRouteResponse = new SelectRouteAction().doAction(purchaseDialog);
+            AvailableTrainsFetcher.fetchAvailableTrains(selectRouteResponse.body().string());
             Integer test2 = 345;
+            // Here we must parse availible trains
+
+            //
+            Integer test3 = 456;
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);
             Toast.makeText(context, "Something went in pay dialog", Toast.LENGTH_SHORT).show();
