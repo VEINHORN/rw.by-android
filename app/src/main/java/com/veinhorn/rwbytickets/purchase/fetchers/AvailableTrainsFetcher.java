@@ -33,10 +33,29 @@ public class AvailableTrainsFetcher {
         return trains;
     }
 
+    // Add several checking for NullPointer anti-vanomas
     private static AvailableTrain fetchTrain(Element trainRow) {
         AvailableTrain train = new AvailableTrain();
-        String selectedRow = trainRow.getElementsByTag("td").get(0).getElementsByTag("span").get(0).attr("id");
+        Elements rowElms = trainRow.getElementsByTag("td");
+
+        String selectedRow = rowElms.get(0).getElementsByTag("span").get(0).attr("id");
         train.setSelectedRow(selectedRow);
+
+        String name = rowElms.get(2).getElementsByTag("a").get(0).val();
+        train.setName(name);
+
+        String type = rowElms.get(2).getElementsByTag("span").get(0).val();
+        train.setType(type);
+
+        String dispatch = rowElms.get(4).val();
+        train.setDispatch(dispatch);
+
+        String arrival = rowElms.get(5).val();
+        train.setArrival(arrival);
+
+        String travelTime = rowElms.get(6).getElementsByTag("span").get(0).val();
+        train.setTravelTime(travelTime);
+
         Integer test = 2143324;
         return train;
     }

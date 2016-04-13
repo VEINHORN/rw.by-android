@@ -8,7 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
 
 import butterknife.Bind;
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar) protected Toolbar toolbar;
     @Bind(R.id.viewPager) protected ViewPager viewPager;
+    private Drawer drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,12 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Purchase");
         setSupportActionBar(toolbar);
         // Build navigation drawer
-        new DrawerBuilder().withActivity(this)
-                .withToolbar(toolbar).build();
+        PrimaryDrawerItem primaryItem = new PrimaryDrawerItem().withName("Purchase");
+        SecondaryDrawerItem ticketsItem = new SecondaryDrawerItem().withName("Tickets");
+        drawer = new DrawerBuilder().withActivity(this)
+                .withToolbar(toolbar)
+                .addDrawerItems(primaryItem, ticketsItem)
+                .build();
 
         viewPager.setAdapter(new PurchasePagerAdapter(getSupportFragmentManager()));
     }
