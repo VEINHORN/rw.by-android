@@ -113,7 +113,7 @@ public class RouteFragment extends Fragment {
 
     /** Make auth, confirm rules, and make search requests for stations */
     @OnClick(R.id.continueButton) public void continuePurchase() {
-        String fromStationInput = fromStationView.getText().toString();
+        /*String fromStationInput = fromStationView.getText().toString();
         String toStationInput = toStationView.getText().toString();
         if ("".equals(fromStationInput)) {
             Toast.makeText(getActivity(), "Enter from station", Toast.LENGTH_SHORT).show();
@@ -123,19 +123,36 @@ public class RouteFragment extends Fragment {
             PurchaseDialog purchaseDialog = PurchasePagerAdapter.getPurchaseDialog();
             fillPurchaseDialog(purchaseDialog, fromStationInput, toStationInput);
             new RouteLoader(getActivity(), purchaseDialog).execute();
-        }
+        }*/
+        PurchaseDialog purchaseDialog = PurchasePagerAdapter.getPurchaseDialog();
+        fillDialogWithTestData(purchaseDialog);
+        new RouteLoader(getActivity(), purchaseDialog).execute();
     }
+
 
     private void fillPurchaseDialog(PurchaseDialog purchaseDialog,
                                     String fromStationInput, String toStationInput) {
         Station fromStation = fromStationAdapter.getStations().getStation(fromStationInput);
         Station toStation = toStationAdapter.getStations().getStation(toStationInput);
-        purchaseDialog.setFromStation(fromStation);
-        purchaseDialog.setToStation(toStation);
+
+        //purchaseDialog.setWhenDate("22.04.2016"); // just for test
+        //purchaseDialog.setFromStation(fromStation);
+        //purchaseDialog.setToStation(toStation);
         purchaseDialog.setAdults(1);
         purchaseDialog.setChildren(0);
         purchaseDialog.setChildrenNoPlaces(0);
         // TODO: Add here additional parameters3
+    }
+
+    private void fillDialogWithTestData(PurchaseDialog dialog) {
+        Station fromStation = new Station("2100000", "МИНСК", "МИНСК, БЕЛАРУСЬ");
+        Station toStation = new Station("2100095", "ЖАБИНКА", "ЖАБИНКА, БЕЛАРУСЬ");
+        dialog.setFromStation(fromStation);
+        dialog.setToStation(toStation);
+        dialog.setWhenDate("22.04.2016");
+        dialog.setAdults(1);
+        dialog.setChildren(0);
+        dialog.setChildrenNoPlaces(0);
     }
 
     public static RouteFragment newInstance(PurchaseDialog purchaseDialog) {

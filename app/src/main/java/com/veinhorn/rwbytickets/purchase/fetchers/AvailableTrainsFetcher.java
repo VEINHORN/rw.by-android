@@ -16,50 +16,77 @@ import java.util.List;
 public class AvailableTrainsFetcher {
     private static final String RW_TABLE_ID = "viewns_7_48QFVAUK6HA180IQAQVJU80004_:form2:id2:tableEx1";
 
-    public static List<AvailableTrain> fetchAvailableTrains(String html) {
-        List<AvailableTrain> trains = new ArrayList<>();
+    public static List<AvailableTrain> fetchAvailableTrains(String html) throws NullPointerException {
         Document document = Jsoup.parse(html);
         Element trainsTable = document.getElementById(RW_TABLE_ID);
         Elements trainRows = getRowsTrElements(trainsTable);
         List<AvailableTrain> availableTrains = fetchAvailableTrains(trainRows);
-        return trains;
+        return availableTrains;
     }
 
-    private static List<AvailableTrain> fetchAvailableTrains(Elements trainRows) {
+    private static List<AvailableTrain> fetchAvailableTrains(Elements trainRows) throws NullPointerException{
         List<AvailableTrain> trains = new ArrayList<>();
         for (Element trainRow : trainRows) {
             AvailableTrain train = fetchTrain(trainRow);
+            trains.add(train);
         }
         return trains;
     }
 
-    // Add several checking for NullPointer anti-vanomas
-    private static AvailableTrain fetchTrain(Element trainRow) {
+    // TODO: Add several checking for NullPointer anti-vanomas
+    private static AvailableTrain fetchTrain(Element trainRow) throws NullPointerException {
         AvailableTrain train = new AvailableTrain();
-        Elements rowElms = trainRow.getElementsByTag("td");
+        Elements columnElms = new Elements();
+        columnElms.addAll(trainRow.getElementsByClass("columnClass1"));
+        columnElms.addAll(trainRow.getElementsByClass("tdLeft"));
+        columnElms.addAll(trainRow.getElementsByClass("tdRight"));
 
-        String selectedRow = rowElms.get(0).getElementsByTag("span").get(0).attr("id");
+        // Fetch values from columns
+        String selectedRow = columnElms.get(0).getElementsByTag("span").get(0).attr("id");
+        String name = columnElms.get(2).getElementsByTag("a").get(0).html();
+        String type = columnElms.get(2).getElementsByTag("span").get(0).html();
+        String dispatch = columnElms.get(4).html();
+        String arrival = columnElms.get(5).html();
+        String travelTime = columnElms.get(6).getElementsByTag("span").get(0).html();
+
+        // Fetch passengers seats
+        String obshie = fetchPassengerSeats(columnElms.get(7));
+        String sidyachie = fetchPassengerSeats(columnElms.get(8));
+        String plazkartnie = fetchPassengerSeats(columnElms.get(9));
+        String kupe = fetchPassengerSeats(columnElms.get(10));
+        String sv = fetchPassengerSeats(columnElms.get(11));
+        String myagkie = fetchPassengerSeats(columnElms.get(12));
+
+        // Fill train obj
         train.setSelectedRow(selectedRow);
-
-        String name = rowElms.get(2).getElementsByTag("a").get(0).val();
         train.setName(name);
-
-        String type = rowElms.get(2).getElementsByTag("span").get(0).val();
         train.setType(type);
-
-        String dispatch = rowElms.get(4).val();
         train.setDispatch(dispatch);
-
-        String arrival = rowElms.get(5).val();
         train.setArrival(arrival);
-
-        String travelTime = rowElms.get(6).getElementsByTag("span").get(0).val();
         train.setTravelTime(travelTime);
+        train.setObshie(obshie);
+        train.setSidyachie(sidyachie);
+        train.setPlazkartnie(plazkartnie);
+        train.setKupe(kupe);
+        train.setSV(sv);
+        train.setMyagkie(myagkie);
 
-        Integer test = 2143324;
         return train;
     }
 
+    /** Fetches and return passanger seats/price */
+    private static String fetchPassengerSeats(Element columnElm) {
+        String seats = null;
+        Elements seatSpans = columnElm.getElementsByTag("span");
+        if (seatSpans.size() == 2) {// there two span elements seats/price
+            seats = seatSpans.get(0).html() + "/" + seatSpans.get(1).html();
+        } else {
+            seats = "";
+        }
+        return seats;
+    }
+
+    /** Selects and combines rows with availible trains from table */
     private static Elements getRowsTrElements(Element trainsTable) {
         Elements greyRows = trainsTable.getElementsByTag("tbody").get(0).getElementsByClass("grey");
         Elements rowClass1 = trainsTable.getElementsByTag("tbody").get(0).getElementsByClass("rowClass1");

@@ -45,9 +45,13 @@ public class RouteLoader extends AsyncTask<String, Void, String> {
 
             //
             Integer test3 = 456;
+        } catch (NullPointerException e) {
+            Log.e(TAG, e.getMessage(), e);
+            Toast.makeText(context, "Jsoup parse error. rw.by page structure changed",
+                    Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);
-            Toast.makeText(context, "Something went in pay dialog", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Smth went wrong in pay dialog", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
             Toast.makeText(context, "Parse error by the way", Toast.LENGTH_SHORT).show();

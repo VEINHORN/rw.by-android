@@ -17,6 +17,67 @@ public class AvailableTrain {
 
     private String travelTime;
 
+    // TODO: Rename this fields later
+    private String obshie;
+
+    private String sidyachie;
+
+    private String plazkartnie;
+
+    private String kupe;
+
+    private String SV;
+
+    private String myagkie;
+
+    public void setMyagkie(String myagkie) {
+        this.myagkie = myagkie;
+    }
+
+    public String getMyagkie() {
+        return myagkie;
+    }
+
+    public void setSV(String SV) {
+        this.SV = SV;
+    }
+
+    public String getSV() {
+        return SV;
+    }
+
+    public void setKupe(String kupe) {
+        this.kupe = kupe;
+    }
+
+    public String getKupe() {
+        return kupe;
+    }
+
+    public void setPlazkartnie(String plazkartnie) {
+        this.plazkartnie = plazkartnie;
+    }
+
+    public String getPlazkartnie() {
+        return plazkartnie;
+    }
+
+    public void setSidyachie(String sidyachie) {
+        this.sidyachie = sidyachie;
+    }
+
+    public String getSidyachie() {
+        return sidyachie;
+    }
+
+    public void setObshie(String obshie) {
+        this.obshie = obshie;
+    }
+
+    public String getObshie() {
+        return obshie;
+    }
+
     public String getTravelTime() {
         return travelTime;
     }

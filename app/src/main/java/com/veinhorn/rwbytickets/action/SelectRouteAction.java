@@ -96,7 +96,7 @@ public class SelectRouteAction extends BaseAction {
                 .add(RW_INPUT_COUNT_ADULTS, dialog.getAdults().toString())
                 .add(RW_INPUT_COUNT_CHILDREN, dialog.getChildren().toString())
                 .add(RW_INPUT_COUNT_CHILDREN_NO_PLACES, dialog.getChildrenNoPlaces().toString())
-                .add(RW_INPUT_DOB, "08.04.2016") // for test now
+                .add(RW_INPUT_DOB, dialog.getWhenDate())
                 .add(RW_INPUT_INT_START_TIME, "0") // for test now
                 .add(RW_INPUT_INT_END_TIME, "23") // for test now
                 .add(RW_INPUT_MIN_DATE, "03.04.2016") // for test now
