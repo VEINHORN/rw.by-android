@@ -24,7 +24,7 @@ import retrofit2.Retrofit;
  * Created by veinhorn on 28.3.16.
  */
 public class StationAutoCompleteAdapter extends BaseAdapter implements Filterable {
-    private static  final String TAG = StationAutoCompleteAdapter.class.getName();
+    private static final String TAG = StationAutoCompleteAdapter.class.getName();
     private LayoutInflater inflater;
 
     private Stations stations;
