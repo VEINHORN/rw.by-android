@@ -9,7 +9,7 @@ import okhttp3.Response;
 /**
  * Created by veinhorn on 30.3.16.
  */
-public class PurchaseDialog {
+public class PurchaseDialog extends Dialog {
     // Purchase data
     private Station fromStation;
     private Station toStation;
@@ -18,11 +18,6 @@ public class PurchaseDialog {
     private Integer children;
     private Integer childrenNoPlaces;
     //
-
-    private Response currentResponse;
-    private DialogStatus dialogStatus;
-
-    private Map<String, String> credentials;
 
     public String getWhenDate() {
         return whenDate;
@@ -56,18 +51,6 @@ public class PurchaseDialog {
         return adults;
     }
 
-    public void setCredentials(Map<String, String> credentials) {
-        this.credentials = credentials;
-    }
-
-    public Map<String, String> getCredentials() {
-        return credentials;
-    }
-
-    public Response getCurrentResponse() {
-        return currentResponse;
-    }
-
     public Station getToStation() {
         return toStation;
     }
@@ -84,15 +67,4 @@ public class PurchaseDialog {
         return fromStation;
     }
 
-    public void setCurrentResponse(Response currentResponse) {
-        this.currentResponse = currentResponse;
-    }
-
-    public DialogStatus getDialogStatus() {
-        return dialogStatus;
-    }
-
-    public void setDialogStatus(DialogStatus dialogStatus) {
-        this.dialogStatus = dialogStatus;
-    }
 }

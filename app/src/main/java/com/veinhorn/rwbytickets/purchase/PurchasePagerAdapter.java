@@ -3,7 +3,6 @@ package com.veinhorn.rwbytickets.purchase;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v7.widget.Toolbar;
 
 import com.veinhorn.rwbytickets.purchase.dialog.DialogStatus;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;

@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
 
 import butterknife.Bind;
@@ -38,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
         drawer = new DrawerBuilder().withActivity(this)
                 .withToolbar(toolbar)
                 .addDrawerItems(primaryItem, ticketsItem)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        return false;
+                    }
+                })
                 .build();
 
         viewPager.setAdapter(new PurchasePagerAdapter(getSupportFragmentManager()));

@@ -11,11 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 import com.veinhorn.rwbytickets.R;
-import com.veinhorn.rwbytickets.RouteLoader;
+import com.veinhorn.rwbytickets.purchase.RouteLoader;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import com.veinhorn.rwbytickets.search.StationAutoCompleteAdapter;

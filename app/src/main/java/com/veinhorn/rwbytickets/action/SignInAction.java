@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.veinhorn.rwbytickets.R;
 import com.veinhorn.rwbytickets.TicketsApp;
+import com.veinhorn.rwbytickets.purchase.dialog.Dialog;
 import com.veinhorn.rwbytickets.purchase.dialog.DialogStatus;
-import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,7 +25,7 @@ import okhttp3.Response;
 /**
  * Created by veinhorn on 30.3.16.
  */
-public class SignInAction extends BaseAction {
+public class SignInAction implements Action<Dialog> {
 
     private static final String SIGN_IN_PAGE_URL = "https://poezd.rw.by/wps/portal/home/login_main";
 
@@ -48,7 +48,7 @@ public class SignInAction extends BaseAction {
 
     // TODO: Add creds object to PurchaseDialog and than pass it here against passing context
     // TODO: Maybe return null if some exception was thrown
-    @Override public Response doAction(PurchaseDialog dialog) throws IOException {
+    @Override public Response doAction(Dialog dialog) throws IOException {
         // Get credentials from somewhere
         Map<String, String> creds = loadCredentials();
         // Get correct sign in url
@@ -64,7 +64,7 @@ public class SignInAction extends BaseAction {
     }
 
     /** Change dialog status and several other parameters */
-    private void fillPurchaseDialog(PurchaseDialog dialog,
+    private void fillPurchaseDialog(Dialog dialog,
                                     Response signInResponse, Map<String, String> creds) {
         dialog.setCurrentResponse(signInResponse);
         dialog.setDialogStatus(DialogStatus.ACCEPT_RULES);

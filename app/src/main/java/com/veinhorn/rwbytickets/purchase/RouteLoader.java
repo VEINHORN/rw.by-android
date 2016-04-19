@@ -1,4 +1,4 @@
-package com.veinhorn.rwbytickets;
+package com.veinhorn.rwbytickets.purchase;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -13,32 +13,28 @@ import com.veinhorn.rwbytickets.purchase.fetchers.AvailableTrainsFetcher;
 
 import java.io.IOException;
 
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 /**
  * Created by veinhorn on 21.3.16.
  */
 public class RouteLoader extends AsyncTask<String, Void, String> {
-
     private static final String TAG = RouteLoader.class.getName();
 
     private Context context;
-    private OkHttpClient httpClient;
-    private PurchaseDialog purchaseDialog;
+    private PurchaseDialog dialog;
 
-    public RouteLoader(Context context, PurchaseDialog purchaseDialog) {
+    public RouteLoader(Context context, PurchaseDialog dialog) {
         this.context = context;
-        httpClient = TicketsApp.httpClient;
-        this.purchaseDialog = purchaseDialog;
+        this.dialog = dialog;
     }
 
     @Override
     protected String doInBackground(String... params) {
         try {
-            Response signInResponse = new SignInAction(context).doAction(purchaseDialog);
-            Response acceptRulesResponse = new ConfirmRulesAction().doAction(purchaseDialog);
-            Response selectRouteResponse = new SelectRouteAction().doAction(purchaseDialog);
+            Response signInResponse = new SignInAction(context).doAction(dialog);
+            Response acceptRulesResponse = new ConfirmRulesAction().doAction(dialog);
+            Response selectRouteResponse = new SelectRouteAction().doAction(dialog);
             AvailableTrainsFetcher.fetchAvailableTrains(selectRouteResponse.body().string());
             Integer test2 = 345;
             // Here we must parse availible trains
