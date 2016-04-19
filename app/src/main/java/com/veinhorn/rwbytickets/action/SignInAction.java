@@ -25,7 +25,7 @@ import okhttp3.Response;
 /**
  * Created by veinhorn on 30.3.16.
  */
-public class SignInAction implements Action<Dialog> {
+public class SignInAction implements Action<Response, Dialog> {
 
     private static final String SIGN_IN_PAGE_URL = "https://poezd.rw.by/wps/portal/home/login_main";
 

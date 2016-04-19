@@ -1,5 +1,6 @@
 package com.veinhorn.rwbytickets;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
+import com.veinhorn.rwbytickets.tickets.TicketsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,11 +45,15 @@ public class MainActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        switch (position) {
+                            case 1:
+                                startActivity(new Intent(MainActivity.this, TicketsActivity.class));
+                                break;
+                        }
                         return false;
                     }
                 })
                 .build();
-
         viewPager.setAdapter(new PurchasePagerAdapter(getSupportFragmentManager()));
     }
 
