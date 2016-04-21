@@ -3,6 +3,8 @@ package com.veinhorn.rwbytickets.tickets;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.veinhorn.rwbytickets.action.FetchOrdersAction;
@@ -24,11 +26,18 @@ public class TicketsLoader extends AsyncTask<String, Void, List<Order>> {
     private Context context;
     private Dialog dialog;
     private TicketsAdapter ticketsAdapter;
+    private ProgressBar progressBar;
 
-    public TicketsLoader(Context context, Dialog dialog, TicketsAdapter ticketsAdapter) {
+    public TicketsLoader(Context context, Dialog dialog, TicketsAdapter ticketsAdapter,
+                         ProgressBar progressBar) {
         this.context = context;
         this.dialog = dialog;
         this.ticketsAdapter = ticketsAdapter;
+        this.progressBar = progressBar;
+    }
+
+    @Override protected void onPreExecute () {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override protected List<Order> doInBackground(String... params) {
@@ -43,6 +52,7 @@ public class TicketsLoader extends AsyncTask<String, Void, List<Order>> {
     }
 
     @Override protected void onPostExecute(List<Order> orders) {
+        progressBar.setVisibility(View.INVISIBLE);
         if (orders != null) {
             ticketsAdapter.updateOrders(orders);
             ticketsAdapter.notifyDataSetChanged();

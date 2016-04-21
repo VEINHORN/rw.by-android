@@ -3,6 +3,7 @@ package com.veinhorn.rwbytickets.tickets;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.veinhorn.rwbytickets.R;
 import com.veinhorn.rwbytickets.purchase.dialog.Dialog;
@@ -16,6 +17,7 @@ import butterknife.ButterKnife;
  */
 public class TicketsActivity extends AppCompatActivity {
     @Bind(R.id.ordersListView) protected ListView ordersListView;
+    @Bind(R.id.progressBar) protected ProgressBar progressBar;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class TicketsActivity extends AppCompatActivity {
         ordersListView.setAdapter(ticketsAdapter);
 
         Dialog dialog = DialogFactory.newInstance();
-        new TicketsLoader(this, dialog, ticketsAdapter).execute();
+        new TicketsLoader(this, dialog, ticketsAdapter, progressBar).execute();
     }
 
 }

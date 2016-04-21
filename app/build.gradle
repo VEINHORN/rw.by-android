@@ -34,4 +34,5 @@ dependencies {
     }
     compile 'com.kyleduo.switchbutton:library:1.4.0'
     compile 'com.code-troopers.betterpickers:library:2.5.2'
+    compile 'com.github.ybq:Android-SpinKit:1.0.3'
 }
