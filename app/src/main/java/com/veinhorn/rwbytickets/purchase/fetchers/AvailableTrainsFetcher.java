@@ -1,5 +1,6 @@
 package com.veinhorn.rwbytickets.purchase.fetchers;
 
+import com.veinhorn.rwbytickets.Fetcher;
 import com.veinhorn.rwbytickets.purchase.model.AvailableTrain;
 
 import org.jsoup.Jsoup;
@@ -13,15 +14,18 @@ import java.util.List;
 /**
  * Created by veinhorn on 5.4.16.
  */
-public class AvailableTrainsFetcher {
+public class AvailableTrainsFetcher implements Fetcher<List<AvailableTrain>> {
     private static final String RW_TABLE_ID = "viewns_7_48QFVAUK6HA180IQAQVJU80004_:form2:id2:tableEx1";
+
+    @Override public List<AvailableTrain> fetch(String html) throws NullPointerException {
+        return fetchAvailableTrains(html);
+    }
 
     public static List<AvailableTrain> fetchAvailableTrains(String html) throws NullPointerException {
         Document document = Jsoup.parse(html);
         Element trainsTable = document.getElementById(RW_TABLE_ID);
         Elements trainRows = getRowsTrElements(trainsTable);
-        List<AvailableTrain> availableTrains = fetchAvailableTrains(trainRows);
-        return availableTrains;
+        return fetchAvailableTrains(trainRows);
     }
 
     private static List<AvailableTrain> fetchAvailableTrains(Elements trainRows) throws NullPointerException{

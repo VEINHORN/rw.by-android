@@ -58,13 +58,13 @@ public class SignInAction implements Action<Response, Dialog> {
         // Do Sign In request
         Response signInResponse = httpClient.newCall(signInRequest).execute();
         // Fill purchase dialog
-        fillPurchaseDialog(dialog, signInResponse, creds);
+        fillDialog(dialog, signInResponse, creds);
 
         return signInResponse;
     }
 
     /** Change dialog status and several other parameters */
-    private void fillPurchaseDialog(Dialog dialog,
+    private void fillDialog(Dialog dialog,
                                     Response signInResponse, Map<String, String> creds) {
         dialog.setCurrentResponse(signInResponse);
         dialog.setDialogStatus(DialogStatus.ACCEPT_RULES);

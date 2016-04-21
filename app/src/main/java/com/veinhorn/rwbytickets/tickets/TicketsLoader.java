@@ -5,10 +5,13 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.veinhorn.rwbytickets.action.FetchOrdersAction;
 import com.veinhorn.rwbytickets.action.SignInAction;
 import com.veinhorn.rwbytickets.purchase.dialog.Dialog;
+import com.veinhorn.rwbytickets.tickets.model.Order;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Response;
 
@@ -29,6 +32,7 @@ public class TicketsLoader extends AsyncTask<String, Void, String> {
     @Override protected String doInBackground(String... params) {
         try {
             Response signInResponse = new SignInAction(context).doAction(dialog);
+            List<Order> orders = new FetchOrdersAction().doAction(dialog);
             Integer test = 1232121;
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);
