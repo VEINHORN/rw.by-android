@@ -41,11 +41,15 @@ public class OrdersFetcher implements Fetcher<List<Order>> {
         columnElms.addAll(tableRow.getElementsByClass("tdRight"));
 
         Order order = new Order();
-        String orderNumber = columnElms.get(0).getElementsByTag("span").get(0)
-                .getElementsByTag("a").get(1).text();
-        String orderDate = columnElms.get(1).text();
-        String dispatch = columnElms.get(2).text();
-        // Fill order object
+        order.setOrderNumber(columnElms.get(0).text());
+        order.setOrderDate(columnElms.get(1).text());
+        order.setDispatch(columnElms.get(2).text());
+        order.setFromStation(columnElms.get(3).text());
+        order.setToStation(columnElms.get(4).text());
+        order.setTrainNumber(columnElms.get(5).text());
+        order.setNumberOfSeats(columnElms.get(6).text());
+        order.setPrice(columnElms.get(7).text());
+        order.setEr(columnElms.get(8).text());
 
         return order;
     }

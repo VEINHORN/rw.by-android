@@ -5,15 +5,15 @@ package com.veinhorn.rwbytickets.tickets.model;
  */
 public class Order {
 
-    public String orderNumber;
-    public String orderDate;
-    public String dispatch;
-    public String fromStation;
-    public String toStation;
-    public String trainNumber;
-    public String numberOfSeats;
-    public String price;
-    public String er;
+    private String orderNumber;
+    private String orderDate;
+    private String dispatch;
+    private String fromStation;
+    private String toStation;
+    private String trainNumber;
+    private String numberOfSeats;
+    private String price;
+    private String er;
 
     public String getOrderNumber() {
         return orderNumber;

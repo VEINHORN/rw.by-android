@@ -18,27 +18,34 @@ import okhttp3.Response;
 /**
  * Created by veinhorn on 19.4.16.
  */
-public class TicketsLoader extends AsyncTask<String, Void, String> {
+public class TicketsLoader extends AsyncTask<String, Void, List<Order>> {
     private static final String TAG = TicketsLoader.class.getName();
 
     private Context context;
     private Dialog dialog;
+    private TicketsAdapter ticketsAdapter;
 
-    public TicketsLoader(Context context, Dialog dialog) {
+    public TicketsLoader(Context context, Dialog dialog, TicketsAdapter ticketsAdapter) {
         this.context = context;
         this.dialog = dialog;
+        this.ticketsAdapter = ticketsAdapter;
     }
 
-    @Override protected String doInBackground(String... params) {
+    @Override protected List<Order> doInBackground(String... params) {
         try {
             Response signInResponse = new SignInAction(context).doAction(dialog);
-            List<Order> orders = new FetchOrdersAction().doAction(dialog);
-            Integer test = 1232121;
+            return new FetchOrdersAction().doAction(dialog);
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);
             Toast.makeText(context, "Some exception by the way", Toast.LENGTH_SHORT).show();
         }
-        return "";
+        return null;
     }
 
+    @Override protected void onPostExecute(List<Order> orders) {
+        if (orders != null) {
+            ticketsAdapter.updateOrders(orders);
+            ticketsAdapter.notifyDataSetChanged();
+        }
+    }
 }
