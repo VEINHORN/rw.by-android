@@ -15,6 +15,7 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.veinhorn.rwbytickets.auth.LoginActivity;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
 import com.veinhorn.rwbytickets.tickets.TicketsActivity;
 
@@ -32,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        // Start log in activity
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
 
         toolbar.setBackgroundColor(Color.parseColor("#212121"));
         toolbar.setTitle("Purchase");

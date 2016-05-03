@@ -16,5 +16,13 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    
+    <style name="AppTheme.LogIn" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@color/loginBackground</item>
+        <item name="android:editTextBackground">@color/loginEditTextBackground</item>
+        <item name="android:editTextColor">@color/loginEditTextColor</item>
+        <item name="android:textColorHint">@color/loginEditTextHintColor</item>
+        <item name="colorButtonNormal">@color/loginButtonColor</item>
+        <item name="android:textColor">@color/loginButtonTextColor</item>
+    </style>
 </resources>
