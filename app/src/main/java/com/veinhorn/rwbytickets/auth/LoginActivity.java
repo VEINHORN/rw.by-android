@@ -3,6 +3,7 @@ package com.veinhorn.rwbytickets.auth;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Bind(R.id.loginEditText) protected EditText loginEditText;
     @Bind(R.id.passwordEditText) protected EditText passwordEditText;
-    @Bind(R.id.loginButton) protected EditText loginButton;
+    @Bind(R.id.loginButton) protected AppCompatButton loginButton;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void logIn(String login, String password) {
         if (validate(login, password)) {
-            new AuthLoader().execute();
+            new AuthLoader(this).execute();
         } else {
             Toast.makeText(this, "Empty login/password", Toast.LENGTH_SHORT).show();
             loginEditText.setText("");
