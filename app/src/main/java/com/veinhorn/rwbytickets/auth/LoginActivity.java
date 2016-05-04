@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.veinhorn.rwbytickets.R;
+import com.veinhorn.rwbytickets.auth.creds.Creds;
+import com.veinhorn.rwbytickets.auth.creds.ICreds;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void logIn(String login, String password) {
         if (validate(login, password)) {
-            new AuthLoader(this).execute();
+            new AuthLoader(this, new Creds(login, password)).execute();
         } else {
             Toast.makeText(this, "Empty login/password", Toast.LENGTH_SHORT).show();
             loginEditText.setText("");
