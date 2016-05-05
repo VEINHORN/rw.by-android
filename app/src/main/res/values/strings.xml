@@ -6,6 +6,8 @@
     <string name="activity_login_password_title">Password</string>
     <string name="activity_login_btn_title">LOGIN</string>
 
+    <string name="creds_file_key">com.veinhorn.rwbytickets.user_creds</string>
+    
     <!-- Several arrays for passenger spinners -->
     <string-array name="adult">
         <item>1</item>

@@ -2,9 +2,11 @@ package com.veinhorn.rwbytickets.auth;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.veinhorn.rwbytickets.R;
 import com.veinhorn.rwbytickets.action.SignInAction;
 import com.veinhorn.rwbytickets.auth.creds.DefaultCreds;
 import com.veinhorn.rwbytickets.auth.creds.ICreds;
@@ -36,19 +38,25 @@ public class AuthLoader extends AsyncTask<String, Void, Boolean> {
                     .doAction(DialogFactory.newInstance());
             return isSignInSuccessful(signInResponse);
         } catch (Exception e) {
-            Integer test = 23423;
+            e.printStackTrace();
         }
         return false;
     }
 
     private boolean isSignInSuccessful(Response res) {
         return res.code() == 200 &&
-                "https://poezd.rw.by/wps/myportal/home/rp/buyTicket".equals(res.request().url());
+            "https://poezd.rw.by/wps/myportal/home/rp/buyTicket".equals(res.request().url().toString());
     }
 
     protected void onPostExecute(Boolean isSignInSuccessful) {
         if (isSignInSuccessful) {
-            Integer yo = 12345;
+            SharedPreferences prefs = activity.getSharedPreferences(
+                    activity.getString(R.string.creds_file_key), activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("user.login", credentials.getLogin());
+            editor.putString("user.password", credentials.getPassword());
+            editor.commit();
+            activity.moveTaskToBack(false);
             activity.finish();
         } else {
             Toast.makeText(activity, "Cannot sign in. Try again", Toast.LENGTH_SHORT).show();
