@@ -1,6 +1,5 @@
 package com.veinhorn.rwbytickets.auth;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -9,7 +8,6 @@ import android.widget.Toast;
 
 import com.veinhorn.rwbytickets.R;
 import com.veinhorn.rwbytickets.auth.creds.Creds;
-import com.veinhorn.rwbytickets.auth.creds.ICreds;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

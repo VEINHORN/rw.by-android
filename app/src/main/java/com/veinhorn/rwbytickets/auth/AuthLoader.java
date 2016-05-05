@@ -44,7 +44,7 @@ public class AuthLoader extends AsyncTask<String, Void, Boolean> {
         return res.code() == 200 && BUY_URL.equals(res.request().url().toString());
     }
 
-    protected void onPostExecute(Boolean isSignInSuccessful) {
+    @Override protected void onPostExecute(Boolean isSignInSuccessful) {
         if (isSignInSuccessful) {
             CredsStorage.saveCredentials(activity, credentials);
             activity.moveTaskToBack(false);
