@@ -1,11 +1,8 @@
 package com.veinhorn.rwbytickets;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,7 +16,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.veinhorn.rwbytickets.auth.LoginActivity;
-import com.veinhorn.rwbytickets.auth.creds.Creds;
+import com.veinhorn.rwbytickets.auth.creds.CredsStorage;
 import com.veinhorn.rwbytickets.auth.creds.ICreds;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
 import com.veinhorn.rwbytickets.tickets.TicketsActivity;
@@ -40,18 +37,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        // Make auth logic here
-        // Start log in activity
-        SharedPreferences prefs = getSharedPreferences(getString(R.string.creds_file_key),
-                Context.MODE_PRIVATE);
-        String login = prefs.getString("user.login", "");
-        String password = prefs.getString("user.password", "");
-        if ("".equals(login) || "".equals(password)) {
+        // Start LoginActivity if user is not signed in
+        ICreds creds = CredsStorage.readCredentials(this);
+        if (creds == null) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+        } else {
+            credentials = creds;
         }
-        fillCredentials();
-        //
 
         toolbar.setBackgroundColor(Color.parseColor("#212121"));
         toolbar.setTitle("Purchase");
@@ -77,20 +70,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new PurchasePagerAdapter(getSupportFragmentManager()));
     }
 
+    /** Reassign user credentials after user is successfully signed in */
     @Override protected void onResume() {
         super.onResume();
-        fillCredentials();
-    }
-
-    private void fillCredentials() {
-        SharedPreferences prefs = getSharedPreferences(getString(R.string.creds_file_key),
-                Context.MODE_PRIVATE);
-        String login = prefs.getString("user.login", "");
-        String password = prefs.getString("user.password", "");
-        if (!"".equals(login) && !"".equals(password)) {
-            credentials = new Creds(prefs.getString("user.login", ""),
-                    prefs.getString("user.password", ""));
-        }
+        ICreds creds = CredsStorage.readCredentials(this);
+        if (creds != null) credentials = creds;
     }
 
     @Override
