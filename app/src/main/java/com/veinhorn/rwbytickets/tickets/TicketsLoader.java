@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.veinhorn.rwbytickets.action.FetchOrdersAction;
 import com.veinhorn.rwbytickets.action.SignInAction;
-import com.veinhorn.rwbytickets.auth.creds.DefaultCreds;
+import com.veinhorn.rwbytickets.auth.creds.DefaultCredentials;
 import com.veinhorn.rwbytickets.purchase.dialog.Dialog;
 import com.veinhorn.rwbytickets.tickets.model.Order;
 
@@ -43,7 +43,7 @@ public class TicketsLoader extends AsyncTask<String, Void, List<Order>> {
 
     @Override protected List<Order> doInBackground(String... params) {
         try {
-            Response signInResponse = new SignInAction(context, new DefaultCreds(context))
+            Response signInResponse = new SignInAction(context, new DefaultCredentials(context))
                     .doAction(dialog);
             return new FetchOrdersAction().doAction(dialog);
         } catch (IOException e) {

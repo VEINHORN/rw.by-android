@@ -5,9 +5,9 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.veinhorn.rwbytickets.action.SignInAction;
-import com.veinhorn.rwbytickets.auth.creds.CredsStorage;
-import com.veinhorn.rwbytickets.auth.creds.DefaultCreds;
-import com.veinhorn.rwbytickets.auth.creds.ICreds;
+import com.veinhorn.rwbytickets.auth.creds.CredentialsStorage;
+import com.veinhorn.rwbytickets.auth.creds.DefaultCredentials;
+import com.veinhorn.rwbytickets.auth.creds.ICredentials;
 import com.veinhorn.rwbytickets.purchase.dialog.factory.DialogFactory;
 
 import okhttp3.Response;
@@ -18,12 +18,12 @@ import okhttp3.Response;
 public class AuthLoader extends AsyncTask<String, Void, Boolean> {
     private static final String BUY_URL = "https://poezd.rw.by/wps/myportal/home/rp/buyTicket";
     private Activity activity;
-    private ICreds credentials;
+    private ICredentials credentials;
 
-    public AuthLoader(Activity activity, ICreds credentials) {
+    public AuthLoader(Activity activity, ICredentials credentials) {
         this.activity = activity;
         if (credentials.getLogin().equals("") || credentials.getPassword().equals("")) {
-            this.credentials = new DefaultCreds(activity);
+            this.credentials = new DefaultCredentials(activity);
         } else {
             this.credentials = credentials;
         }
@@ -46,7 +46,7 @@ public class AuthLoader extends AsyncTask<String, Void, Boolean> {
 
     @Override protected void onPostExecute(Boolean isSignInSuccessful) {
         if (isSignInSuccessful) {
-            CredsStorage.saveCredentials(activity, credentials);
+            CredentialsStorage.saveCredentials(activity, credentials);
             activity.moveTaskToBack(false);
             activity.finish();
         } else {

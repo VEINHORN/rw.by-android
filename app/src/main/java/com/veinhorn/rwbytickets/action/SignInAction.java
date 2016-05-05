@@ -3,7 +3,7 @@ package com.veinhorn.rwbytickets.action;
 import android.content.Context;
 
 import com.veinhorn.rwbytickets.TicketsApp;
-import com.veinhorn.rwbytickets.auth.creds.ICreds;
+import com.veinhorn.rwbytickets.auth.creds.ICredentials;
 import com.veinhorn.rwbytickets.purchase.dialog.Dialog;
 import com.veinhorn.rwbytickets.purchase.dialog.DialogStatus;
 
@@ -33,9 +33,9 @@ public class SignInAction implements Action<Response, Dialog> {
 
     private Context context;
     private OkHttpClient httpClient;
-    private ICreds credentials;
+    private ICredentials credentials;
 
-    public SignInAction(Context context, ICreds credentials) {
+    public SignInAction(Context context, ICredentials credentials) {
         this.context = context;
         httpClient = TicketsApp.httpClient;
         this.credentials = credentials;

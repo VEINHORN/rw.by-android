@@ -1,8 +1,6 @@
 package com.veinhorn.rwbytickets.purchase.dialog;
 
-import com.veinhorn.rwbytickets.auth.creds.ICreds;
-
-import java.util.Map;
+import com.veinhorn.rwbytickets.auth.creds.ICredentials;
 
 import okhttp3.Response;
 
@@ -17,7 +15,7 @@ public class Dialog {
     /** Stores the current status of the dialog */
     private DialogStatus dialogStatus;
 
-    private ICreds credentials;
+    private ICredentials credentials;
 
     public void setCurrentResponse(Response currentResponse) {
         this.currentResponse = currentResponse;
@@ -35,11 +33,11 @@ public class Dialog {
         return dialogStatus;
     }
 
-    public void setCredentials(ICreds credentials) {
+    public void setCredentials(ICredentials credentials) {
         this.credentials = credentials;
     }
 
-    public ICreds getCredentials() {
+    public ICredentials getCredentials() {
         return credentials;
     }
 }

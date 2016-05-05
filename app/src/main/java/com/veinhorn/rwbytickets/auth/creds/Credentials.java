@@ -3,11 +3,11 @@ package com.veinhorn.rwbytickets.auth.creds;
 /**
  * Created by veinhorn on 4.5.16.
  */
-public class Creds implements ICreds {
+public class Credentials implements ICredentials {
     private String login;
     private String password;
 
-    public Creds(String login, String password) {
+    public Credentials(String login, String password) {
         this.login = login;
         this.password = password;
     }

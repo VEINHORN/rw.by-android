@@ -10,18 +10,18 @@ import java.util.Properties;
 /**
  * Created by veinhorn on 4.5.16.
  */
-public class DefaultCreds implements ICreds {
+public class DefaultCredentials implements ICredentials {
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
 
     private Properties props;
 
-    public DefaultCreds(Context context) {
+    public DefaultCredentials(Context context) {
         props = new Properties();
         try {
             props.load(context.getResources().openRawResource(R.raw.creds));
         } catch (IOException e) {
-            System.out.println("Cannot load creds from file");
+            System.out.println("Cannot load credentials from file");
         }
     }
 

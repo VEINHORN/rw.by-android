@@ -16,8 +16,8 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.veinhorn.rwbytickets.auth.LoginActivity;
-import com.veinhorn.rwbytickets.auth.creds.CredsStorage;
-import com.veinhorn.rwbytickets.auth.creds.ICreds;
+import com.veinhorn.rwbytickets.auth.creds.CredentialsStorage;
+import com.veinhorn.rwbytickets.auth.creds.ICredentials;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
 import com.veinhorn.rwbytickets.tickets.TicketsActivity;
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.toolbar) protected Toolbar toolbar;
     @Bind(R.id.viewPager) protected ViewPager viewPager;
     private Drawer drawer;
-    private ICreds credentials;
+    private ICredentials credentials;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         // Start LoginActivity if user is not signed in
-        ICreds creds = CredsStorage.readCredentials(this);
+        ICredentials creds = CredentialsStorage.readCredentials(this);
         if (creds == null) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     /** Reassign user credentials after user is successfully signed in */
     @Override protected void onResume() {
         super.onResume();
-        ICreds creds = CredsStorage.readCredentials(this);
+        ICredentials creds = CredentialsStorage.readCredentials(this);
         if (creds != null) credentials = creds;
     }
 

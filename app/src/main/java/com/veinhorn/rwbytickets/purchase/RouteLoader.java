@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.veinhorn.rwbytickets.action.ConfirmRulesAction;
 import com.veinhorn.rwbytickets.action.SelectRouteAction;
 import com.veinhorn.rwbytickets.action.SignInAction;
-import com.veinhorn.rwbytickets.auth.creds.DefaultCreds;
+import com.veinhorn.rwbytickets.auth.creds.DefaultCredentials;
 import com.veinhorn.rwbytickets.purchase.dialog.PurchaseDialog;
 import com.veinhorn.rwbytickets.purchase.fetchers.AvailableTrainsFetcher;
 
@@ -33,7 +33,7 @@ public class RouteLoader extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         try {
-            Response signInResponse = new SignInAction(context, new DefaultCreds(context))
+            Response signInResponse = new SignInAction(context, new DefaultCredentials(context))
                     .doAction(dialog);
             Response acceptRulesResponse = new ConfirmRulesAction().doAction(dialog);
             Response selectRouteResponse = new SelectRouteAction().doAction(dialog);
