@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
             credentials = creds;
         }
 
-        toolbar.setBackgroundColor(Color.parseColor("#212121"));
-        toolbar.setTitle("Purchase");
+        // toolbar.setBackgroundColor(Color.parseColor(""));
+        toolbar.setTitle(getString(R.string.activity_main_toolbar_title));
         setSupportActionBar(toolbar);
         // Build navigation drawer
         drawer = new NavigationDrawer(this, toolbar, credentials).create();

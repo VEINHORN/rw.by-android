@@ -48,7 +48,8 @@ public class TicketsLoader extends AsyncTask<String, Void, List<Order>> {
             return new FetchOrdersAction().doAction(dialog);
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);
-            Toast.makeText(context, "Some exception by the way", Toast.LENGTH_SHORT).show();
+        } catch (NullPointerException e) {
+            Log.e(TAG, e.getMessage(), e);
         }
         return null;
     }
@@ -58,6 +59,8 @@ public class TicketsLoader extends AsyncTask<String, Void, List<Order>> {
         if (orders != null) {
             ticketsAdapter.updateOrders(orders);
             ticketsAdapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(context, "One day rw.by will break my mind", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.veinhorn.rwbytickets;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
@@ -13,8 +14,10 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.veinhorn.rwbytickets.auth.creds.ICredentials;
+import com.veinhorn.rwbytickets.tickets.TicketsActivity;
 
 /**
  * Created by veinhorn on 11.5.16.
@@ -43,6 +46,19 @@ public class NavigationDrawer {
                 .addDrawerItems(primaryItem, secondaryItem)
                 .withFooterClickable(false)
                 .addDrawerItems()
+                // TODO: Create different listeners for different drawers
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        switch (position) {
+                            case 2:
+                                Toast.makeText(activity, "Clicked nav drawer item", Toast.LENGTH_SHORT).show();
+                                activity.startActivity(new Intent(activity, TicketsActivity.class));
+                                return true;
+                        }
+                        return false;
+                    }
+                })
                 .build();
     }
 
@@ -58,7 +74,7 @@ public class NavigationDrawer {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
                         Toast.makeText(activity, "Clicked on user profile", Toast.LENGTH_SHORT).show();
-                        return false;
+                        return true;
                     }
                 })
                 .build();
