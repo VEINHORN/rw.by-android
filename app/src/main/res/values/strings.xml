@@ -2,6 +2,8 @@
     <string name="app_name">Tickets</string>
     <string name="action_settings">Settings</string>
 
+    <string name="activity_main_toolbar_title">Purchase</string>
+
     <string name="activity_login_title">Login</string>
     <string name="activity_login_password_title">Password</string>
     <string name="activity_login_btn_title">LOGIN</string>

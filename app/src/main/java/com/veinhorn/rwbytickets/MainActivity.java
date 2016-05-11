@@ -8,18 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.veinhorn.rwbytickets.auth.LoginActivity;
 import com.veinhorn.rwbytickets.auth.creds.CredentialsStorage;
 import com.veinhorn.rwbytickets.auth.creds.ICredentials;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
-import com.veinhorn.rwbytickets.tickets.TicketsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -49,23 +43,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Purchase");
         setSupportActionBar(toolbar);
         // Build navigation drawer
-        PrimaryDrawerItem primaryItem = new PrimaryDrawerItem().withName("Purchase");
-        SecondaryDrawerItem ticketsItem = new SecondaryDrawerItem().withName("Tickets");
-        drawer = new DrawerBuilder().withActivity(this)
-                .withToolbar(toolbar)
-                .addDrawerItems(primaryItem, ticketsItem)
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        switch (position) {
-                            case 1:
-                                startActivity(new Intent(MainActivity.this, TicketsActivity.class));
-                                break;
-                        }
-                        return false;
-                    }
-                })
-                .build();
+        drawer = new NavigationDrawer(this, toolbar, credentials).create();
+
         viewPager.setAdapter(new PurchasePagerAdapter(getSupportFragmentManager()));
     }
 
