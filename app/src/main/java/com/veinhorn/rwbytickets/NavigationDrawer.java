@@ -31,8 +31,10 @@ public class NavigationDrawer {
     }
 
     public Drawer create() {
-        PrimaryDrawerItem primaryItem = new PrimaryDrawerItem().withName("Purchase");
-        SecondaryDrawerItem secondaryItem = new SecondaryDrawerItem().withName("Tickets");
+        PrimaryDrawerItem primaryItem = new PrimaryDrawerItem().withName("Purchase")
+                .withIcon(FontAwesome.Icon.faw_shopping_cart);
+        SecondaryDrawerItem secondaryItem = new SecondaryDrawerItem().withName("Tickets")
+                .withIcon(FontAwesome.Icon.faw_ticket);
 
         return new DrawerBuilder()
                 .withActivity(activity)
