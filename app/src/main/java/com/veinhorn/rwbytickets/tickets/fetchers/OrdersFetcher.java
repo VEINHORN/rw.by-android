@@ -19,6 +19,7 @@ public class OrdersFetcher implements Fetcher<List<Order>> {
 
     @Override public List<Order> fetch(String html) throws NullPointerException {
         Document document = Jsoup.parse(html);
+        // TODO: Fix NullPointer exception here
         Element tableBodyElm = document.getElementById(ORDERS_TABLE_ID)
                 .getElementsByTag("tbody").get(0);
         Elements tableRows = new Elements();
