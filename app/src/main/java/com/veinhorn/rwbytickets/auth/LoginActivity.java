@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.veinhorn.rwbytickets.R;
 import com.veinhorn.rwbytickets.auth.creds.Credentials;
 
+import java.util.Date;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void logIn(String login, String password) {
         if (validate(login, password)) {
-            new AuthLoader(this, new Credentials(login, password)).execute();
+            new AuthLoader(this, new Credentials(login, password, new Date())).execute();
         } else {
             Toast.makeText(this, "Empty login/password", Toast.LENGTH_SHORT).show();
             loginEditText.setText("");

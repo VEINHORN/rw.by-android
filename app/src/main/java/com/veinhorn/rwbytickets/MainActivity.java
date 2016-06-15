@@ -15,6 +15,8 @@ import com.veinhorn.rwbytickets.auth.creds.CredentialsStorage;
 import com.veinhorn.rwbytickets.auth.creds.ICredentials;
 import com.veinhorn.rwbytickets.purchase.PurchasePagerAdapter;
 
+import java.util.Date;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -36,7 +38,16 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         } else {
-            credentials = creds;
+            // Check if logged in date is expired (period: 14 days)
+            final int ONE_DAY_MILLIS = 86400 * 1000;
+            final long deltaMillis = new Date().getTime() - creds.getLoggedIn().getTime();
+            if (deltaMillis < 14 * ONE_DAY_MILLIS) { // not expired
+                credentials = creds;
+            } else { // expired
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+
         }
 
         // toolbar.setBackgroundColor(Color.parseColor(""));

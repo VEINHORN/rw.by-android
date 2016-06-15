@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 
 import com.veinhorn.rwbytickets.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -15,6 +13,7 @@ import java.util.Date;
 public class CredentialsStorage {
     private static final String LOGIN_KEY = "user.login";
     private static final String PASSWORD_KEY = "user.password";
+    private static final String LOGGED_IN_KEY = "user.loggedin";
     private static final String SIGNIN_DATE_KEY = "user.signedin_date";
 
     /** Returns valid creds or null (if login or password is empty) */
@@ -22,8 +21,9 @@ public class CredentialsStorage {
         SharedPreferences prefs = openSharedPreferences(context);
         String login = prefs.getString(LOGIN_KEY, "");
         String password = prefs.getString(PASSWORD_KEY, "");
+        Date loggedIn = new Date(prefs.getLong(LOGGED_IN_KEY, new Date().getTime()));
         if ("".equals(login) || "".equals(password)) return null;
-        return new Credentials(login, password);
+        return new Credentials(login, password, loggedIn);
     }
 
     /** Saves user credentials in shared preferences */
@@ -32,22 +32,17 @@ public class CredentialsStorage {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(LOGIN_KEY, creds.getLogin());
         editor.putString(PASSWORD_KEY, creds.getPassword());
-        editor.putString(SIGNIN_DATE_KEY, new Date().toString());
+        editor.putString(SIGNIN_DATE_KEY, creds.getLogin());
         editor.apply();
     }
 
     public static void clearCredentials(Context context) {
         SharedPreferences prefs = openSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(LOGIN_KEY, "");
-        editor.putString(PASSWORD_KEY, "");
-        editor.putString(SIGNIN_DATE_KEY, "");
+        editor.remove(LOGIN_KEY);
+        editor.remove(PASSWORD_KEY);
+        editor.remove(SIGNIN_DATE_KEY);
         editor.apply();
-    }
-
-    public Date getSignInDate(Context context) throws ParseException {
-        SharedPreferences prefs = openSharedPreferences(context);
-        return new SimpleDateFormat().parse(prefs.getString(SIGNIN_DATE_KEY, ""));
     }
 
     private static SharedPreferences openSharedPreferences(Context context) {

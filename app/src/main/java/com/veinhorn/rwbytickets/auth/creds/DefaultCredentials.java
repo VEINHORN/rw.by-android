@@ -5,6 +5,7 @@ import android.content.Context;
 import com.veinhorn.rwbytickets.R;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -32,4 +33,6 @@ public class DefaultCredentials implements ICredentials {
     @Override public String getPassword() {
         return props.getProperty(PASSWORD);
     }
+
+    @Override public Date getLoggedIn() { return new Date(); }
 }

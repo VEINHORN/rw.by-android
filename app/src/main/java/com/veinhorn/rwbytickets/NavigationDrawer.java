@@ -16,6 +16,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.veinhorn.rwbytickets.auth.creds.Credentials;
 import com.veinhorn.rwbytickets.auth.creds.ICredentials;
 import com.veinhorn.rwbytickets.tickets.TicketsActivity;
 
@@ -30,7 +31,9 @@ public class NavigationDrawer {
     public NavigationDrawer(Activity activity, Toolbar toolbar, ICredentials credentials) {
         this.activity = activity;
         this.toolbar = toolbar;
-        this.credentials = credentials;
+        if (credentials == null) this.credentials = new Credentials("Unknown", "Unknown", null);
+        else                     this.credentials = credentials;
+
     }
 
     public Drawer create() {
