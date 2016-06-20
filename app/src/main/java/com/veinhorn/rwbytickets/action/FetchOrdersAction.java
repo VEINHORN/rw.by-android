@@ -30,6 +30,8 @@ public class FetchOrdersAction implements Action<List<Order>, Dialog> {
         String personalAccountUrl = createPersonalAccountUrl();
         Request personalAccountReq = createPersonalAccountRequest(personalAccountUrl);
         Response personalAccountRes = httpClient.newCall(personalAccountReq).execute();
+
+        fillDialog(dialog, personalAccountRes);
         return new OrdersFetcher().fetch(personalAccountRes.body().string());
     }
 
